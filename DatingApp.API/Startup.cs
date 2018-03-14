@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DatingApp.API.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -23,7 +25,15 @@ namespace DatingApp.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc();
+
+            //DbContext dla MSSQL
+            
+            // var dbContextString = @"Server=(localdb)\mssqllocaldb;Database=EntityDB; Trusted_Connection=True;";
+            // services.AddDbContext<DataContext>(options => options.UseSqlServer(dbContextString));
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
