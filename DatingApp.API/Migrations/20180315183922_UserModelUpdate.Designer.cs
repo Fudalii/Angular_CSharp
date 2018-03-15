@@ -10,8 +10,8 @@ using System;
 namespace DatingApp.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20180315165626_AddUserModel")]
-    partial class AddUserModel
+    [Migration("20180315183922_UserModelUpdate")]
+    partial class UserModelUpdate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,7 +26,7 @@ namespace DatingApp.API.Migrations
 
                     b.Property<byte[]>("PasswordHash");
 
-                    b.Property<byte[]>("PasswordSat");
+                    b.Property<byte[]>("PasswordSalt");
 
                     b.Property<string>("UserName");
 
