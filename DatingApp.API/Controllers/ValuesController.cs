@@ -26,6 +26,7 @@ namespace DatingApp.API.Controllers
            var values = await _context.Value.ToListAsync();
            return Ok(values);
         }
+        
 
         // GET api/values/5
         [HttpGet("{id}")]
