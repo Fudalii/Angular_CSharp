@@ -1,22 +1,23 @@
-
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpService } from './HTTP/http.service';
-import { AppComponent } from './app.component';
 import { NgModule } from '@angular/core';
-import { ValuesComponent } from './Values/Values.component';
+import { AppComponent } from './app.component';
+import { ValuesComponent } from './values/values.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpService } from './Http/Http.service';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    ValuesComponent
+    ValuesComponent,
+
+
 ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule
-
   ],
   providers: [HttpService],
   bootstrap: [AppComponent]

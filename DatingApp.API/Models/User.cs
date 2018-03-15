@@ -1,0 +1,10 @@
+namespace DatingApp.API.Models
+{
+    public class User
+    {
+        public int Id { get; set; }
+        public byte[] PasswordHash { get; set; }
+        public byte[] PasswordSat { get; set; }
+        public string UserName { get; set; }
+    }
+}

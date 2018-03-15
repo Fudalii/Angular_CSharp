@@ -1,14 +1,13 @@
-import {HttpService} from '../HTTP/http.service';
 import { Component, OnInit } from '@angular/core';
-import { Values } from '../Models/Values';
+import { HttpService } from '../Http/Http.service';
+import { Values } from '../Modes/Values';
 
 @Component({
   selector: 'app-values',
-  templateUrl: './Values.component.html',
-  styleUrls: ['./Values.component.css']
+  templateUrl: './values.component.html',
+  styleUrls: ['./values.component.less']
 })
 export class ValuesComponent implements OnInit {
-
   values: Values;
 
   constructor(private hhtpService: HttpService) {}
