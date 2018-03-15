@@ -17,6 +17,8 @@ namespace DatingApp.API.Data
         }
 
         // =================
+
+        // Rejestracja 
         public async Task<User> Register(User user, string password)
         {
             byte[] passwordHah, passwordSalt;
@@ -41,6 +43,7 @@ namespace DatingApp.API.Data
                
             }
 
+        // Logowanie i sprawdzenie hasła z kluczem
         public async Task<User> Login(string username, string password)
         {
             var user = await _context.Users.FirstOrDefaultAsync( u => u.UserName == username);
@@ -75,10 +78,17 @@ namespace DatingApp.API.Data
                }
             }
 
-
-        public Task<bool> UserExist(string username)
+        // Sprawdzenie czy login istnieje. 
+        public async Task<bool> UserExist(string username)
         {
-           return null;
+
+             if ( await _context.Users.AnyAsync( u => u.UserName == username) )
+             {
+                 return true;
+             }
+
+             return false;
+                
         }
     }
 }
