@@ -26,15 +26,15 @@ namespace DatingApp.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
-            services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+          //  services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc();
             services.AddScoped<IAuthRepository, AuthRepository>();
 
 
-            //DbContext dla MSSQL
+           // DbContext dla MSSQL
             
-            // var dbContextString = @"Server=(localdb)\mssqllocaldb;Database=EntityDB; Trusted_Connection=True;";
-            // services.AddDbContext<DataContext>(options => options.UseSqlServer(dbContextString));
+            var dbContextString = @"Server=(localdb)\mssqllocaldb;Database=EntityDB; Trusted_Connection=True;";
+            services.AddDbContext<DataContext>(options => options.UseSqlServer(dbContextString));
 
 
         }
