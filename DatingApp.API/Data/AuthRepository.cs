@@ -21,10 +21,10 @@ namespace DatingApp.API.Data
         // Rejestracja 
         public async Task<User> Register(User user, string password)
         {
-            byte[] passwordHah, passwordSalt;
-            CreatePasswordHash(password, out passwordHah, out passwordSalt);
+            byte[] passwordHash, passwordSalt;
+            CreatePasswordHash(password, out passwordHash, out passwordSalt);
 
-            user.PasswordHash = passwordHah;
+            user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
 
            await _context.Users.AddAsync(user);
@@ -33,11 +33,11 @@ namespace DatingApp.API.Data
            return user;
            
         }
-            private void CreatePasswordHash(string password, out byte[] passwordHah, out byte[] passwordSalt)
+            private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
             {
-               using (var hmac = new HMACSHA512())  // new System.Security.Cryptography.HMACSHA512())
+               using (var hmac = new System.Security.Cryptography.HMACSHA512())  // new System.Security.Cryptography.HMACSHA512())
                {
-                   passwordHah = hmac.Key;
+                   passwordHash = hmac.Key;
                    passwordSalt = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
                }
                
@@ -64,14 +64,14 @@ namespace DatingApp.API.Data
 
             private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
             {
-               using (var hmac = new HMACSHA512(passwordSalt))  // new System.Security.Cryptography.HMACSHA512())
+               using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))  // new System.Security.Cryptography.HMACSHA512())
                {
                    var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
                    
                     for (int i = 0; i < computedHash.Length; i++)
                         {
                             if ( computedHash[i] != passwordHash[i] )  
-                            return false;
+                            return false; 
                         }
 
                     return true;
