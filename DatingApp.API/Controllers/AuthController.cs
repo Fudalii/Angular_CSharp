@@ -57,26 +57,23 @@ namespace DatingApp.API.Controllers
             return Unauthorized();
 
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes("Super tajny Key");
-            var tokenDescription = new SecurityTokenDescriptor{
-
-                Subject = new ClaimsIdentity(new Claim[]{
-
+            var key = Encoding.ASCII.GetBytes("Super tajny Key Key Key");
+             var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
                     new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
                     new Claim(ClaimTypes.Name, userFromRepo.UserName)
                 }),
 
-                Expires = DateTime.Now.AddHours(12),
-
+                Expires = DateTime.Now.AddDays(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
-                SecurityAlgorithms.HmacSha512Signature)
-
+                    SecurityAlgorithms.HmacSha512Signature)
             };
-
-            var token = tokenHandler.CreateToken(tokenDescription);
+            var token = tokenHandler.CreateToken(tokenDescriptor);
             var tokenString = tokenHandler.WriteToken(token);
 
-            return Ok(new {tokenString});
+            return Ok(new { tokenString });
         }
 
 
