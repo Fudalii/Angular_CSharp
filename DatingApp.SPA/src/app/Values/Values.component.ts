@@ -13,10 +13,10 @@ export class ValuesComponent implements OnInit {
   constructor(private hhtpService: HttpService) {}
 
   ngOnInit(): void {
-    this.Pobierz();
   }
 
-  Pobierz() {
-    this.hhtpService.GetVaues().subscribe(v => (this.values = v));
+  Pobierz(value): void {
+    this.hhtpService.GetVaues(value).subscribe( x => console.log(x));
+    console.log(value);
   }
 }
