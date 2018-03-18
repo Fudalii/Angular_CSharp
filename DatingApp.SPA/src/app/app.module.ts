@@ -11,6 +11,8 @@ import { HttpModule } from '@angular/http';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { AppRoutingModule } from './app.routing.module';
+import { LoginComponent } from './login/login.component';
+import { GuardLoginService } from './login/guardLogin.service';
 
 
 @NgModule({
@@ -19,7 +21,8 @@ import { AppRoutingModule } from './app.routing.module';
     ValuesComponent,
     NavComponent,
     HomeComponent,
-    RegisterComponent
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,7 @@ import { AppRoutingModule } from './app.routing.module';
     HttpModule,
     AppRoutingModule
   ],
-  providers: [HttpService, AuthService],
+  providers: [HttpService, AuthService, GuardLoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
