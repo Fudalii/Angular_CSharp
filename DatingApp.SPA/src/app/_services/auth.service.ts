@@ -4,6 +4,7 @@ import { Response, Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthData } from '../Modes/authData';
+import { AlertifyService } from './alertify.service';
 
 @Injectable()
 export class AuthService {
@@ -15,7 +16,8 @@ export class AuthService {
   constructor(
     private httpClient: HttpClient,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private alert: AlertifyService
   ) {}
 
   login(model: AuthData) {
@@ -30,8 +32,11 @@ export class AuthService {
           params => (this.redirectUrl = params['return'])
         );
         this.router.navigateByUrl(this.redirectUrl || '/home');
+
+        this.alert.success('Sukces');
+
       }
-    }, (error: HttpErrorResponse) => this.errorMessege(error)
+    }, (error: HttpErrorResponse) => {this.alert.error('Niepoprawne dane'); this.errorMessege(error); }
   );
   }
 

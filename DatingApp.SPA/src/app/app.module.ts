@@ -13,6 +13,7 @@ import { RegisterComponent } from './register/register.component';
 import { AppRoutingModule } from './app.routing.module';
 import { LoginComponent } from './login/login.component';
 import { GuardLoginService } from './login/guardLogin.service';
+import { AlertifyService } from './_services/alertify.service';
 
 
 @NgModule({
@@ -32,7 +33,7 @@ import { GuardLoginService } from './login/guardLogin.service';
     HttpModule,
     AppRoutingModule
   ],
-  providers: [HttpService, AuthService, GuardLoginService],
+  providers: [HttpService, AuthService, GuardLoginService, AlertifyService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
