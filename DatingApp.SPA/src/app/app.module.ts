@@ -10,6 +10,7 @@ import { AuthService } from './_services/auth.service';
 import { HttpModule } from '@angular/http';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
+import { AppRoutingModule } from './app.routing.module';
 
 
 @NgModule({
@@ -19,15 +20,15 @@ import { RegisterComponent } from './register/register.component';
     NavComponent,
     HomeComponent,
     RegisterComponent
-
-],
+  ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    HttpModule
+    HttpModule,
+    AppRoutingModule
   ],
   providers: [HttpService, AuthService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
