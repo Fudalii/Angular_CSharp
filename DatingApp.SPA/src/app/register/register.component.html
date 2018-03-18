@@ -1,3 +1,40 @@
-<p>
-  register works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+
+      <form class="form-signin" #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+        <div class="text-center mb-4">
+          <p class="fa fa-edit fa-3x"></p>
+          <h1 class="h3 mb-3 font-weight-normal">REJESTRACJA</h1>
+          <p>Build form controls with floating labels via the
+            <code>:placeholder-shown</code> pseudo-element.
+            <a href="https://caniuse.com/#feat=css-placeholder-shown">Works in latest Chrome, Safari, and Firefox.</a>
+          </p>
+        </div>
+
+        <div class="form-label-group">
+          <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="" name="username"
+            [(ngModel)]="userData.username">
+          <label for="inputEmail">Email address</label>
+        </div>
+
+        <div class="form-label-group">
+          <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="" name="password" [(ngModel)]="userData.password">
+          <label for="inputPassword">Password</label>
+        </div>
+
+        <div class="form-group">
+
+          <label for="favoriteValue">Jaka jest twoja ulubiona wartosć</label>
+          <select class="form-control" id="favoriteValue">
+            <option *ngFor="let value of valuesFromHome">{{value.name}}</option>
+          </select>
+        </div>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!registerForm.valid">Zarejestruj się </button>
+        <button class="btn btn-sm btn-secondary btn-block" (click)="cancelRegister()"> Anuluj rejestracje </button>
+        <p class="mt-5 mb-3 text-muted text-center">© 2017-2018</p>
+      </form>
+    </div>
+  </div>
+</div>

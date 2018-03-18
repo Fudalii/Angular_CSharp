@@ -15,8 +15,8 @@ export class ValuesComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  Pobierz(value): void {
-    this.hhtpService.GetVaues(value).subscribe( x => console.log(x));
-    console.log(value);
-  }
+  // Pobierz(value): void {
+  //   this.hhtpService.GetVaues(value).subscribe( x => console.log(x));
+  //   console.log(value);
+  // }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit  } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthData } from '../Modes/authData';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./login.component.less']
 })
 export class LoginComponent implements OnInit {
-  model: LoginData = new LoginData();
+
+  model: AuthData = new AuthData();
   userName = localStorage.getItem('userName');
   return = '';
 
@@ -32,9 +34,6 @@ export class LoginComponent implements OnInit {
 
   }
 
-  testowa() {
-    console.log(this.userName);
-  }
 
   loggedIn() {
     const loggedIn = localStorage.getItem('JwSToken');
@@ -44,10 +43,5 @@ export class LoginComponent implements OnInit {
   logOut() {
     localStorage.removeItem('JwSToken');
   }
-}
-
-export class LoginData {
-  username: string;
-  password: string;
 }
 

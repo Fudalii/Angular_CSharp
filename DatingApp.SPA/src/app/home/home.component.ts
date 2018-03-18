@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { HttpService } from '../Http/Http.service';
 
 @Component({
   selector: 'app-home',
@@ -6,10 +7,30 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.less']
 })
 export class HomeComponent implements OnInit {
+  values: any;
 
-  constructor() { }
+  registerMode = '';
+
+  constructor(private httpService: HttpService) {}
 
   ngOnInit() {
+    this.Pobierz();
+  }
+
+  registerToggle(toggle) {
+    this.registerMode = toggle;
+  }
+
+  Pobierz() {
+    this.httpService.GetVaues().subscribe(x => {
+      this.values = x;
+      console.log(this.values);
+    });
+  }
+
+  cancelRegisterParent(event) {
+     this.registerMode = event;
+     console.log(this.registerMode);
   }
 
 }

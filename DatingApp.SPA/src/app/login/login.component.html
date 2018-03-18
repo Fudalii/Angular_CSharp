@@ -1,18 +1,39 @@
-<form #loginForm="ngForm" (ngSubmit)="login(loginForm)" class="form" role="form">
-  <div class="form-group">
-    <input [(ngModel)]="model.username" required name="username" id="emailInput" placeholder="Login" class="form-control form-control-sm"
-      type="text">
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+
+      <form class="form-signin" #loginForm = "ngForm" (ngSubmit)="login(loginForm)" class="form" >
+        <div class="text-center mb-4">
+          <p class="fa fa-unlock-alt fa-3x"></p>
+          <h1 class="h3 mb-3 font-weight-normal">LOGOWANIE DO SERWISU</h1>
+          <p>Build form controls with floating labels via the
+            <code>:placeholder-shown</code> pseudo-element.
+            <a>Works in latest Chrome, Safari, and Firefox.</a>
+          </p>
+        </div>
+
+        <div class="form-label-group">
+          <input type="text" class="form-control" placeholder="Email address" required  [(ngModel)]="model.username"  name="username" >
+          <label for="inputEmail">Email address</label>
+        </div>
+
+        <div class="form-label-group">
+          <input  type="password" class="form-control" placeholder="Password" required  [(ngModel)]="model.password"  name="password" >
+          <label for="inputPassword">Password</label>
+        </div>
+
+        <button class="btn btn-lg btn-success" type="submit" [disabled]="!loginForm.valid">Zaloguj się </button>
+        <p class="mt-5 mb-3 text-muted text-center">© 2017-2018</p>
+
+      </form>
+    </div>
   </div>
-  <div class="form-group">
-    <input [(ngModel)]="model.password" required name="password" id="passwordInput" placeholder="Password" class="form-control form-control-sm"
-      type="text">
-  </div>
-  <div class="form-group">
-    <button type="submit" class="btn btn-primary btn-block" [disabled]="!loginForm.valid">Login</button>
-  </div>
-  <div class="form-group text-xs-center">
-    <small>
-      <a href="#">Forgot password?</a>
-    </small>
-  </div>
-</form>
+</div>
+
+<pre>
+
+
+
+</pre>
+
+

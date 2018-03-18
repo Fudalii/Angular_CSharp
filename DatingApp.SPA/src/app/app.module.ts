@@ -22,7 +22,8 @@ import { GuardLoginService } from './login/guardLogin.service';
     NavComponent,
     HomeComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+
   ],
   imports: [
     BrowserModule,

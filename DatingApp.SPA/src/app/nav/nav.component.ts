@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Values } from '../Modes/Values';
 import { AuthService } from '../_services/auth.service';
+import { AuthData } from '../Modes/authData';
 
 @Component({
   selector: 'app-nav',
@@ -9,7 +10,7 @@ import { AuthService } from '../_services/auth.service';
   styleUrls: ['./nav.component.less']
 })
 export class NavComponent implements OnInit {
-  model: LoginData = new LoginData();
+  model: AuthData = new AuthData();
   userName = localStorage.getItem('userName');
 
   constructor(private authService: AuthService) {}
@@ -36,7 +37,3 @@ export class NavComponent implements OnInit {
   }
 }
 
-export class LoginData {
-  username: string;
-  password: string;
-}

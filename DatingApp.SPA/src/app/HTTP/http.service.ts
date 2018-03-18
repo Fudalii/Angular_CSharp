@@ -7,11 +7,11 @@ import { Values } from '../Modes/Values';
 
 @Injectable()
 export class HttpService {
-  URL_Fiabro = "http://192.168.100.26:80/api/devices/55/action/";
+  URL_Api = 'http://localhost:5000/api/values';
 
   Fibaro_body = {
     id: 0,
-    jsonrpc: "2.0",
+    jsonrpc: '2.0',
     result: {
       result: 0
     }
@@ -19,19 +19,15 @@ export class HttpService {
 
   httpOptions = {
     headers: new HttpHeaders({
-      "Content-Type": "application/json",
-      "Authorization": "Basic " + btoa("fudalikamil@hotmail.com:7595153Kamil!!"),
+      'Content-Type': 'application/json',
+      'Authorization': 'Basic ' + btoa('fudalikamil@hotmail.com:7595153Kamil!!'),
       'Access-Control-Allow-Headers': 'x-auth, content-type'
     })
   };
 
   constructor(private http: HttpClient) {}
 
-  GetVaues(action: string) {
-    return this.http.post(
-      this.URL_Fiabro + action,
-      this.Fibaro_body,
-      this.httpOptions
-    );
+  GetVaues() {
+    return this.http.get(this.URL_Api);
   }
 }
