@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Response, Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -12,28 +12,39 @@ export class AuthService {
   userToken: string;
   redirectUrl = '';
 
-  constructor(private httpClient: HttpClient, private route: ActivatedRoute, private router: Router) {
-  }
+  constructor(
+    private httpClient: HttpClient,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   login(model: AuthData) {
     return this.httpClient.post(this.baseURL + 'login', model).subscribe(x => {
-              console.log(model);
-              const user = JSON.parse(JSON.stringify(x));
-              if (user.tokenString) {
-                this.userToken = user.tokenString;
-                localStorage.setItem('JwSToken', user.tokenString);
-                localStorage.setItem('userName', model.username);
-                this.route.queryParams.subscribe(params => this.redirectUrl = params['return']) ;
-                this.router.navigateByUrl(this.redirectUrl || '/home');
-              }
-    });
+      console.log(model);
+      const user = JSON.parse(JSON.stringify(x));
+      if (user.tokenString) {
+        this.userToken = user.tokenString;
+        localStorage.setItem('JwSToken', user.tokenString);
+        localStorage.setItem('userName', model.username);
+        this.route.queryParams.subscribe(
+          params => (this.redirectUrl = params['return'])
+        );
+        this.router.navigateByUrl(this.redirectUrl || '/home');
+      }
+    }, (error: HttpErrorResponse) => this.errorMessege(error)
+  );
   }
-
 
   register(model: AuthData) {
-      return this.httpClient.post(this.baseURL + 'register', model);
+    return this.httpClient.post(this.baseURL + 'register', model).subscribe(
+      x => console.log(x),
+      (error: HttpErrorResponse) => {this.errorMessege(error); console.log(error); }
+    );
   }
 
+  errorMessege(error: HttpErrorResponse) {
+    console.log(JSON.stringify(error.error));
 
+  }
 
 }

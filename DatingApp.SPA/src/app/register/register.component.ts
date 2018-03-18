@@ -22,7 +22,7 @@ export class RegisterComponent implements OnInit {
   register(data: NgForm) {
     this.userData.username = data.controls['username'].value;
     this.userData.password = data.controls['password'].value;
-    this.authService.register(this.userData).subscribe(x => console.log(x));
+    this.authService.register(this.userData);
 
   }
 

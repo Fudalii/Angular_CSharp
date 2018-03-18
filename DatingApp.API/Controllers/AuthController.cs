@@ -26,10 +26,16 @@ namespace DatingApp.API.Controllers
     public async Task<IActionResult> register([FromBody] UserForRegister userForRegister)  {
         
         // User Exist ??
+        if (string.IsNullOrEmpty(userForRegister.username))
+             return BadRequest(ModelState);
+             
          userForRegister.username = userForRegister.username.ToLower();
 
-        if ( await _repo.UserExist(userForRegister.username) )
-            ModelState.AddModelError("Username", "Taki user już istnieje");
+        if ( await _repo.UserExist(userForRegister.username) ){
+          ModelState.AddModelError("Username", "Taki user już istnieje"); 
+           return BadRequest("Taki user juz istnieje");
+        }
+            //return BadRequest(ModelState);
             //return BadRequest("User exist in database!");
         
         // validate request
@@ -54,7 +60,9 @@ namespace DatingApp.API.Controllers
             var userFromRepo = await _repo.Login(userForLogin.username.ToLower(), userForLogin.password);
 
             if (userFromRepo == null)
-            return Unauthorized();
+            //return Unauthorized();
+            return  BadRequest("Nie znaleziono użytkownika");
+            
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes("Super tajny Key Key Key");

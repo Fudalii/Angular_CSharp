@@ -84,9 +84,9 @@ namespace DatingApp.API.Data
 
              if ( await _context.Users.AnyAsync( u => u.UserName == username) )
              {
-                 return true;
+                 return true; 
              }
-
+            
              return false;
                 
         }
