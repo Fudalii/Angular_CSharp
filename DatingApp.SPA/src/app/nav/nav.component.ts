@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Values } from '../Modes/Values';
 import { AuthService } from '../_services/auth.service';
@@ -11,11 +11,15 @@ import { AuthData } from '../Modes/authData';
 })
 export class NavComponent implements OnInit {
   model: AuthData = new AuthData();
-  userName = localStorage.getItem('userName');
+  // userName = localStorage.getItem('userName');
+
+  uniqueName: any;
 
   constructor(private authService: AuthService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.uniqueName = this.uniqueName = this.authService.decodeToken.unique_name;
+  }
 
   login(loginForm: NgForm) {
     this.model.username = loginForm.controls['username'].value;
@@ -23,13 +27,14 @@ export class NavComponent implements OnInit {
     this.authService.login(this.model);
   }
 
-  testowa() {
-    console.log(this.userName);
-  }
+
+
+  // testowa() {
+  //   console.log(this.userName);
+  // }
 
   loggedIn() {
-    const loggedIn = localStorage.getItem('JwSToken');
-    return !!loggedIn;
+    return this.authService.loggedIn();
   }
 
   logOut() {

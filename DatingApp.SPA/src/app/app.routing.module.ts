@@ -4,21 +4,39 @@ import { HomeComponent } from './home/home.component';
 import { ValuesComponent } from './values/values.component';
 import { LoginComponent } from './login/login.component';
 import { GuardLoginService } from './login/guardLogin.service';
+import { MemberListComponent } from './member-list/member-list.component';
+import { ListsComponent } from './lists/lists.component';
+import { MessagesComponent } from './messages/messages.component';
 
 
 const appRoutes: Routes = [
   {
-    path: 'home',
+    path: '',
     component: HomeComponent
   },
   {
-    path: 'values',
-    component: ValuesComponent,
+    path: 'members',
+    component: MemberListComponent,
+    canActivate: [GuardLoginService]
+  },
+  {
+    path: 'list',
+    component: ListsComponent,
+    canActivate: [GuardLoginService]
+  },
+  {
+    path: 'messages',
+    component: MessagesComponent,
     canActivate: [GuardLoginService]
   },
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: '**',
+    redirectTo: 'home',
+    pathMatch: 'full'
   }
 ];
 

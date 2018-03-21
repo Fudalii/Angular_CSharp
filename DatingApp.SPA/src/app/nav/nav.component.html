@@ -1,21 +1,43 @@
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary" role="navigation">
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-bootom" role="navigation">
-   <div class="container">
-    <a class="navbar-brand" routerLink="/home">Home</a>
+  <div class="container">
+<a class="navbar-brand" [routerLink]="[ '']">Home</a>
+
     <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
       &#9776;
     </button>
     <div class="collapse navbar-collapse" id="exCollapsingNavbar">
       <ul class="nav navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/values">Values</a>
+          <a class="nav-link" [routerLink]="[ '/members']" routerLinkActive="myLinkActive">Matches</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link"  routerLink="/login">Login</a>
+          <a class="nav-link" [routerLink]="[ '/list']" routerLinkActive="myLinkActive">List</a>
+
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link">-----</a>
+          <a class="nav-link" [routerLink]="[ '/messages']" routerLinkActive="myLinkActive">Messages</a>
+
         </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="[ '/login']" routerLinkActive="myLinkActive">Login</a>
+
+        </li>
+
+
+        <li class="nav-item dropdown" dropdown>
+
+          <a class="nav-link" dropdownToggle>Click me for a dropdown, yo!</a>
+          <ul *dropdownMenu class="dropdown-menu">
+            <li>
+              <a class="dropdown-item" href="#">1111</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">2222</a>
+            </li>
+          </ul>
+        </li>
+
         <li class="nav-item">
           <a href="#" class="nav-link">-----</a>
         </li>
@@ -32,18 +54,20 @@
             <span class="caret"></span>
           </button>
 
-          <ul class="dropdown-menu dropdown-menu-right mt-1">
+          <ul  class="dropdown-menu dropdown-menu-right mt-1">
             <li class="p-3">
 
-              <form  #loginForm="ngForm" (ngSubmit)="login(loginForm)" class="form" role="form">
+              <form #loginForm="ngForm" (ngSubmit)="login(loginForm)" class="form" role="form">
                 <div class="form-group">
-                  <input [(ngModel)]="model.username" required  name="username" id="emailInput" placeholder="Login"  class="form-control form-control-sm" type="text" >
+                  <input [(ngModel)]="model.username" required name="username" id="emailInput" placeholder="Login" class="form-control form-control-sm"
+                    type="text">
                 </div>
                 <div class="form-group">
-                  <input [(ngModel)]="model.password" required  name="password" id="passwordInput" placeholder="Password" class="form-control form-control-sm" type="text">
+                  <input [(ngModel)]="model.password" required name="password" id="passwordInput" placeholder="Password" class="form-control form-control-sm"
+                    type="text">
                 </div>
                 <div class="form-group">
-                  <button type="submit" class="btn btn-primary btn-block" [disabled]="!loginForm.valid">Login</button>
+                  <button  type="submit" class="btn btn-primary btn-block" [disabled]="!loginForm.valid" (click)="login()">Login</button>
                 </div>
                 <div class="form-group text-xs-center">
                   <small>
@@ -55,63 +79,10 @@
             </li>
           </ul>
         </li>
-        <li *ngIf="loggedIn()" class="nav-item">
-            <a (click)="logOut()" class="nav-link">Wyloguj</a>
+        <li *ngIf="loggedIn()" class="nav-item myLogOut">
+          <a (click)="logOut()" class="nav-link ">Wyloguj {{uniqueName}} | </a>
         </li>
       </ul>
     </div>
-   </div>
-</nav>
-
-
-
-
-
-<!--
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark ">
-  <a class="navbar-brand" href="#">Carousel</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
-    aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarCollapse">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home
-          <span class="sr-only">(current)</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
-    </ul>
-    <form *ngIf="!loggedIn()" #loginForm="ngForm" (ngSubmit)="login(loginForm)" class="form-inline mt-2 mt-md-0">
-      <input [(ngModel)]="model.username" required name="username" class="form-control mr-sm-2" type="text" placeholder="Login">
-      <input [(ngModel)]="model.password" required name="password" class="form-control mr-sm-2" type="text" placeholder="Hasło">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" [disabled]="!loginForm.valid">Zaloguj</button>
-    </form>
-    <ul *ngIf="loggedIn()" class="navbar-nav">
-      <li>
-        <a class="nav-link">Witaj: {{userName}}</a>
-      </li>
-
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account Setting</a>
-        <div class="dropdown-menu" aria-labelledby="dropdown03">
-          <a class="dropdown-item" (click)="logOut()">Wyloguj się</a>
-          <a class="dropdown-item" (click)="testowa()">Another action</a>
-
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-
-    </ul>
-
-
-
   </div>
 </nav>
- -->

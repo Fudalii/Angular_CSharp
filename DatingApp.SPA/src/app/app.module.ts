@@ -14,6 +14,11 @@ import { AppRoutingModule } from './app.routing.module';
 import { LoginComponent } from './login/login.component';
 import { GuardLoginService } from './login/guardLogin.service';
 import { AlertifyService } from './_services/alertify.service';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { MemberListComponent } from './member-list/member-list.component';
+import { MessagesComponent } from './messages/messages.component';
+import { ListsComponent } from './lists/lists.component';
+
 
 
 @NgModule({
@@ -24,14 +29,17 @@ import { AlertifyService } from './_services/alertify.service';
     HomeComponent,
     RegisterComponent,
     LoginComponent,
-
+    MemberListComponent,
+    MessagesComponent,
+    ListsComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BsDropdownModule.forRoot()
   ],
   providers: [HttpService, AuthService, GuardLoginService, AlertifyService],
   bootstrap: [AppComponent]

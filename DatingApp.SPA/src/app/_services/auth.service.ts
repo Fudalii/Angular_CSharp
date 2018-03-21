@@ -5,12 +5,17 @@ import 'rxjs/add/operator/map';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthData } from '../Modes/authData';
 import { AlertifyService } from './alertify.service';
+import { tokenNotExpired, JwtHelper } from 'angular2-jwt';
+
+
 
 @Injectable()
 export class AuthService {
   baseURL = 'http://localhost:5000/api/auth/';
 
-  userToken: string;
+  userToken: any;
+  decodeToken: any;
+  jwtHelper: JwtHelper = new JwtHelper();
   redirectUrl = '';
 
   constructor(
@@ -27,11 +32,12 @@ export class AuthService {
       if (user.tokenString) {
         this.userToken = user.tokenString;
         localStorage.setItem('JwSToken', user.tokenString);
-        localStorage.setItem('userName', model.username);
+        this.decodeToken = this.jwtHelper.decodeToken(user.tokenString);
+        console.log (this.decodeToken);
         this.route.queryParams.subscribe(
           params => (this.redirectUrl = params['return'])
         );
-        this.router.navigateByUrl(this.redirectUrl || '/home');
+        this.router.navigateByUrl(this.redirectUrl || '');
 
         this.alert.success('Sukces');
 
@@ -50,6 +56,10 @@ export class AuthService {
   errorMessege(error: HttpErrorResponse) {
     console.log(JSON.stringify(error.error));
 
+  }
+
+  loggedIn() {
+    return tokenNotExpired('JwSToken');
   }
 
 }
