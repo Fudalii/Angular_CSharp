@@ -12,7 +12,24 @@ namespace DatingApp.API.Data
 
         public DbSet<Value> Value { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Photos> Photos { get; set; }
+
+
+         protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+                   
+                    modelBuilder.Entity<Photos>()
+                        .HasOne(p => p.User)
+                        .WithMany(u => u.Photos);
+
+                    base.OnModelCreating(modelBuilder);
+
+        }
+
 
 
     }
+
+
+
 }
