@@ -28,7 +28,7 @@ namespace DatingApp.API.Controllers
 
             var users = await _userDataRepository.GetUsers();
 
-            var usersForReturn = _mapper.Map<UserForListDto>(users);
+            var usersForReturn = _mapper.Map<IList<UserForListDto>>(users);
 
             return  Ok(usersForReturn);
         }

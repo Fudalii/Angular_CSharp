@@ -18,10 +18,11 @@ namespace DatingApp.API.DTO
         public string KnowAs { get; set; } 
         public string Interests { get; set; } 
         public string City { get; set; } 
-        public string Country { get; set; } 
+        public string Country { get; set; }  
+       public string PhotoUrl { get; set; }
 
         // One tu many Left
-        public IList<Photos> Photos { get; set; }
+        public IList<PhotoForDetaisDto> Photos { get; set; }
       
     }
 }
