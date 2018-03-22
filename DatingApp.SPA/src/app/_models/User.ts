@@ -4,7 +4,7 @@ import { Photos } from './Photos.ts';
 export interface User {
        id: number;
        userName: string;
-       knowAs: string;
+       knownAs: string;
        age: number;
        gender: string;
        created: Date;

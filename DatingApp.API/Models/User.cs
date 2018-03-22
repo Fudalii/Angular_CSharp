@@ -12,6 +12,7 @@ namespace DatingApp.API.Models
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
         public string Gender { get; set; }
+        public string KnownAs { get; set; }
         public DateTime DateOfBirth { get; set; }   // date of birth from User.cs
         public DateTime Created { get; set; }
         public DateTime LastActivate { get; set; }

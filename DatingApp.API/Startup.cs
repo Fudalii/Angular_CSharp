@@ -40,7 +40,7 @@ namespace DatingApp.API
             services.AddDbContext<DataContext>(options => options.UseSqlServer(dbContextString));
             
            
-           // Przykłądowe dane dla DB Seed.cs
+           // Seed Przykłądowe dane dla DB Seed.cs
             services.AddTransient<Seed>();
            
             services.AddMvc()
@@ -70,14 +70,14 @@ namespace DatingApp.API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, Seed seeder)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, Seed seeder)  //Seed seeder
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
             
-            //Przykładowe dane dla DB z JSON  Seed.cs 
+            //Seed - Przykładowe dane dla DB z JSON  Seed.cs 
             seeder.SeedUsers(); 
 
             app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
