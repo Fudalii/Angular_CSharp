@@ -39,8 +39,6 @@ namespace DatingApp.API.Controllers
            else {
                return Ok("Brak takeigo usera");
            }
-
-           
         }
 
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using DatingApp.API.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -51,6 +52,7 @@ namespace DatingApp.API
             //Dep. Injection List
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IUserDataRepository, UserDataRepository>();
+            services.AddAutoMapper();
 
             // Autoryzacja Usera
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => {
