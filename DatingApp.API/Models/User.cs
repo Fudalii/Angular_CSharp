@@ -12,11 +12,10 @@ namespace DatingApp.API.Models
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
         public string Gender { get; set; }
-        public int Age { get; set; }   // date of birth from User.cs
+        public DateTime DateOfBirth { get; set; }   // date of birth from User.cs
         public DateTime Created { get; set; }
         public DateTime LastActivate { get; set; }
-        public string KnowAs { get; set; }  // LookinFor from User.cs
-        public string LookingFor { get; set; } 
+        public string LookingFor  { get; set; }  // LookinFor from User.cs
         public string Interests { get; set; } 
         public string City { get; set; } 
         public string Country { get; set; } 
