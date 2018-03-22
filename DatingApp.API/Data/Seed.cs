@@ -16,8 +16,8 @@ namespace DatingApp.API.Data
 
         public void SeedUsers (){
 
-            // _dataContext.Users.RemoveRange(_dataContext.Users);
-            // _dataContext.SaveChanges();
+            _dataContext.Users.RemoveRange(_dataContext.Users);
+            _dataContext.SaveChanges();
 
             //Seed users ang Generate password
 

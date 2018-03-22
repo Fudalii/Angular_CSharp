@@ -6,12 +6,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthData } from '../_models/authData';
 import { AlertifyService } from './alertify.service';
 import { tokenNotExpired, JwtHelper } from 'angular2-jwt';
+import { environment } from '../../environments/environment';
 
 
 
 @Injectable()
 export class AuthService {
-  baseURL = 'http://localhost:5000/api/auth/';
+  baseURL = environment.apiUrl;
 
   userToken: any;
   decodeToken: any;
@@ -26,7 +27,7 @@ export class AuthService {
   ) {}
 
   login(model: AuthData) {
-    return this.httpClient.post(this.baseURL + 'login', model).subscribe(x => {
+    return this.httpClient.post(this.baseURL + 'auth/login', model).subscribe(x => {
       console.log(model);
       const user = JSON.parse(JSON.stringify(x));
       if (user.tokenString) {
@@ -35,9 +36,8 @@ export class AuthService {
         this.decodeToken = this.jwtHelper.decodeToken(user.tokenString);
         console.log (this.decodeToken);
         this.route.queryParams.subscribe(
-          params => (this.redirectUrl = params['return'])
-        );
-        this.router.navigateByUrl(this.redirectUrl || '');
+          params => (this.redirectUrl = params['return'])  );
+        this.router.navigateByUrl(this.redirectUrl || '' );
 
         this.alert.success('Sukces');
 
@@ -47,7 +47,7 @@ export class AuthService {
   }
 
   register(model: AuthData) {
-    return this.httpClient.post(this.baseURL + 'register', model).subscribe(
+    return this.httpClient.post(this.baseURL + 'auth/register', model).subscribe(
       x => console.log(x),
       (error: HttpErrorResponse) => {this.errorMessege(error); console.log(error); }
     );

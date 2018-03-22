@@ -3,7 +3,7 @@ import { Photos } from './Photos.ts';
 
 export interface User {
        id: number;
-       username: string;
+       userName: string;
        knowAs: string;
        age: number;
        gender: string;

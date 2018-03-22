@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Values } from '../_models/Values';
 import { AuthService } from '../_services/auth.service';
 import { AuthData } from '../_models/authData';
+import { AlertifyService } from '../_services/alertify.service';
 
 @Component({
   selector: 'app-nav',
@@ -15,16 +16,16 @@ export class NavComponent implements OnInit {
 
   uniqueName: any;
 
-  constructor(private authService: AuthService) {}
+  constructor(private _authService: AuthService, private  _alert: AlertifyService) {}
 
   ngOnInit() {
-    this.uniqueName = this.uniqueName = this.authService.decodeToken.unique_name;
+    this.uniqueName = this.uniqueName = this._authService.decodeToken.unique_name;
   }
 
   login(loginForm: NgForm) {
     this.model.username = loginForm.controls['username'].value;
     this.model.password = loginForm.controls['password'].value;
-    this.authService.login(this.model);
+    this._authService.login(this.model);
   }
 
 
@@ -34,11 +35,13 @@ export class NavComponent implements OnInit {
   // }
 
   loggedIn() {
-    return this.authService.loggedIn();
+    return this._authService.loggedIn();
   }
 
   logOut() {
     localStorage.removeItem('JwSToken');
+    this._alert.message('Wylogowano poprawnie');
+
   }
 }
 

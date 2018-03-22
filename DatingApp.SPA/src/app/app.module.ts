@@ -15,9 +15,11 @@ import { LoginComponent } from './login/login.component';
 import { GuardLoginService } from './login/guardLogin.service';
 import { AlertifyService } from './_services/alertify.service';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { MemberListComponent } from './member-list/member-list.component';
 import { MessagesComponent } from './messages/messages.component';
 import { ListsComponent } from './lists/lists.component';
+import { UserService } from './_services/user.service';
+import { MemberListComponent } from './members/member-list/member-list.component';
+import { MemberCardComponent } from './members/member-card/member-card.component';
 
 
 
@@ -30,6 +32,7 @@ import { ListsComponent } from './lists/lists.component';
     RegisterComponent,
     LoginComponent,
     MemberListComponent,
+    MemberCardComponent,
     MessagesComponent,
     ListsComponent
   ],
@@ -41,7 +44,7 @@ import { ListsComponent } from './lists/lists.component';
     AppRoutingModule,
     BsDropdownModule.forRoot()
   ],
-  providers: [HttpService, AuthService, GuardLoginService, AlertifyService],
+  providers: [HttpService, AuthService, GuardLoginService, AlertifyService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

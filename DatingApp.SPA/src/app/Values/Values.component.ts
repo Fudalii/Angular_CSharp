@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../_http/Http.service';
 import { Values } from '../_models/Values';
+import { UserService } from '../_services/user.service';
 
 @Component({
   selector: 'app-values',
@@ -10,13 +11,15 @@ import { Values } from '../_models/Values';
 export class ValuesComponent implements OnInit {
   values: Values;
 
-  constructor(private hhtpService: HttpService) {}
+  constructor(private _auth: UserService) {}
 
   ngOnInit(): void {
+
   }
 
-  // Pobierz(value): void {
-  //   this.hhtpService.GetVaues(value).subscribe( x => console.log(x));
-  //   console.log(value);
-  // }
+  Pobierz() {
+    this._auth.getUsers().subscribe(
+      u => console.log(u)
+    );
+  }
 }

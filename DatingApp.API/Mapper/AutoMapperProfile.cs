@@ -15,8 +15,8 @@ namespace DatingApp.API.Mapper
                     opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.IsMain).Url);
                 })
                 .ForMember(dest => dest.Age, opt => opt.ResolveUsing(d => CalculateAge(d.DateOfBirth))  
-                )
-                .ForMember(dest => dest.Id, opt => opt.Ignore());
+                );
+               // .ForMember(dest => dest.Id, opt => opt.Ignore());
         
 
             CreateMap<User, UserForDetailsDto>()

@@ -4,7 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { ValuesComponent } from './values/values.component';
 import { LoginComponent } from './login/login.component';
 import { GuardLoginService } from './login/guardLogin.service';
-import { MemberListComponent } from './member-list/member-list.component';
+import { MemberListComponent } from './members/member-list/member-list.component';
 import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
 
@@ -27,6 +27,11 @@ const appRoutes: Routes = [
   {
     path: 'messages',
     component: MessagesComponent,
+    canActivate: [GuardLoginService]
+  },
+  {
+    path: 'values',
+    component: ValuesComponent,
     canActivate: [GuardLoginService]
   },
   {
