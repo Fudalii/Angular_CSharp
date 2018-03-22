@@ -12,7 +12,7 @@ namespace DatingApp.API.Data
 
         public DbSet<Value> Value { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<Photos> Photos { get; set; }
+        public DbSet<Photos> Photos { get; set; }  
 
 
          protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -20,7 +20,8 @@ namespace DatingApp.API.Data
                    
                     modelBuilder.Entity<Photos>()
                         .HasOne(p => p.User)
-                        .WithMany(u => u.Photos);
+                        .WithMany(u => u.Photos)
+                        .IsRequired();
 
                     base.OnModelCreating(modelBuilder);
 

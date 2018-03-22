@@ -11,8 +11,8 @@ using System;
 namespace DatingApp.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20180321135528_UserAndPhotoModels")]
-    partial class UserAndPhotoModels
+    [Migration("20180321175343_FluentAPI")]
+    partial class FluentAPI
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,7 +34,8 @@ namespace DatingApp.API.Migrations
 
                     b.Property<string>("Url");
 
-                    b.Property<int?>("UserId");
+                    b.Property<int?>("UserId")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -93,7 +94,8 @@ namespace DatingApp.API.Migrations
                 {
                     b.HasOne("DatingApp.API.Models.User", "User")
                         .WithMany("Photos")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

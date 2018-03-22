@@ -13,6 +13,7 @@ namespace DatingApp.API.Models
         // Manu to one RIGHT
         public User User { get; set; }
 
+
     }
 
 }

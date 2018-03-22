@@ -35,7 +35,9 @@ namespace DatingApp.API
             // DbContext dla MSSQL
             var dbContextString = @"Server=(localdb)\mssqllocaldb;Database=EntityDB; Trusted_Connection=True;";
             services.AddDbContext<DataContext>(options => options.UseSqlServer(dbContextString));
-
+            
+            services.AddTransient<Seed>();
+           
             services.AddMvc();
             services.AddScoped<IAuthRepository, AuthRepository>();
 
@@ -54,12 +56,13 @@ namespace DatingApp.API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, Seed seeder)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+            seeder.SeedUsers(); 
             app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
             app.UseAuthentication();
             app.UseMvc(); 

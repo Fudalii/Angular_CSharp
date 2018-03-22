@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace DatingApp.API.Models
 {
@@ -23,8 +24,7 @@ namespace DatingApp.API.Models
         // One tu many Left
         public IList<Photos> Photos { get; set; }
       
-
-
+     
 
 
 
