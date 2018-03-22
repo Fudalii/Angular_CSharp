@@ -25,4 +25,4 @@ namespace DatingApp.API.DTO
         public IList<PhotoForDetaisDto> Photos { get; set; }
       
     }
-}
+} 

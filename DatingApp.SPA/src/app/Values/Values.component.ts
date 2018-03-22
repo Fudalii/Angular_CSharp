@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService } from '../Http/Http.service';
-import { Values } from '../Modes/Values';
+import { HttpService } from '../_http/Http.service';
+import { Values } from '../_models/Values';
 
 @Component({
   selector: 'app-values',

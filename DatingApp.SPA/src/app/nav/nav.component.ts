@@ -1,8 +1,8 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Values } from '../Modes/Values';
+import { Values } from '../_models/Values';
 import { AuthService } from '../_services/auth.service';
-import { AuthData } from '../Modes/authData';
+import { AuthData } from '../_models/authData';
 
 @Component({
   selector: 'app-nav',

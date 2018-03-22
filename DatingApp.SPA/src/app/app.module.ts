@@ -4,7 +4,7 @@ import { AppComponent } from './app.component';
 import { ValuesComponent } from './values/values.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpService } from './Http/Http.service';
+import { HttpService } from './_http/Http.service';
 import { NavComponent } from './nav/nav.component';
 import { AuthService } from './_services/auth.service';
 import { HttpModule } from '@angular/http';

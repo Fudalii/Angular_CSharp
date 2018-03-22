@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { HttpService } from '../Http/Http.service';
+import { HttpService } from '../_http/Http.service';
 
 @Component({
   selector: 'app-home',

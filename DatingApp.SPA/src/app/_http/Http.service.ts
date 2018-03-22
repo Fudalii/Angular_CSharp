@@ -2,7 +2,7 @@ import {RequestOptions} from '@angular/http';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { Values } from '../Modes/Values';
+import { Values } from '../_models/Values';
 
 
 @Injectable()

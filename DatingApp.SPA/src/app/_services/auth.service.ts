@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Response, Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthData } from '../Modes/authData';
+import { AuthData } from '../_models/authData';
 import { AlertifyService } from './alertify.service';
 import { tokenNotExpired, JwtHelper } from 'angular2-jwt';
 

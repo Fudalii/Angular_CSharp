@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { AuthData } from '../Modes/authData';
+import { AuthData } from '../_models/authData';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../_services/auth.service';
 
