@@ -13,6 +13,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace DatingApp.API
 {
@@ -36,11 +38,21 @@ namespace DatingApp.API
             var dbContextString = @"Server=(localdb)\mssqllocaldb;Database=EntityDB; Trusted_Connection=True;";
             services.AddDbContext<DataContext>(options => options.UseSqlServer(dbContextString));
             
+           
+           // Przykłądowe dane dla DB Seed.cs
             services.AddTransient<Seed>();
            
-            services.AddMvc();
-            services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddMvc()
+             .AddJsonOptions(options => {
+                options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
 
+            //Dep. Injection List
+            services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IUserDataRepository, UserDataRepository>();
+
+            // Autoryzacja Usera
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => {
                 options.TokenValidationParameters = new TokenValidationParameters {
                     ValidateIssuerSigningKey = true,
@@ -62,10 +74,15 @@ namespace DatingApp.API
             {
                 app.UseDeveloperExceptionPage();
             }
+            
+            //Przykładowe dane dla DB z JSON  Seed.cs 
             seeder.SeedUsers(); 
+
             app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
             app.UseAuthentication();
-            app.UseMvc(); 
+            app.UseMvc();
+           
+                    
            
         }
     }
