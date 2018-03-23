@@ -1,12 +1,14 @@
 import { Routes, RouterModule, CanActivate } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { HomeComponent } from './home/home.component';
-import { ValuesComponent } from './values/values.component';
 import { LoginComponent } from './login/login.component';
 import { GuardLoginService } from './login/guardLogin.service';
 import { MemberListComponent } from './members/member-list/member-list.component';
 import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
+import { MemberDetailComponent } from './members/member-detail/member-detail.component';
+import { MemberDetailResolver } from './_resolve/member-detail.resolver';
+import { MemberListResolver } from './_resolve/member-list.resolver';
 
 
 const appRoutes: Routes = [
@@ -17,6 +19,13 @@ const appRoutes: Routes = [
   {
     path: 'members',
     component: MemberListComponent,
+    canActivate: [GuardLoginService],
+    resolve: { users: MemberListResolver },
+  },
+  {
+    path: 'members/:id',
+    component: MemberDetailComponent,
+    resolve: { user: MemberDetailResolver },
     canActivate: [GuardLoginService]
   },
   {
@@ -27,11 +36,6 @@ const appRoutes: Routes = [
   {
     path: 'messages',
     component: MessagesComponent,
-    canActivate: [GuardLoginService]
-  },
-  {
-    path: 'values',
-    component: ValuesComponent,
     canActivate: [GuardLoginService]
   },
   {

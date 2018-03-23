@@ -1,6 +1,45 @@
 .card-header:hover img {
       transform: scale(1.1, 1.05);
       transition-duration: 500ms;
-      transition-timing-function: ease-out;
       opacity: 0.7;
+}
+
+.panel-image {
+
+    position: relative;
+    overflow: hidden;
+
+}
+
+.member-icons {
+    position: absolute;
+    bottom: -30%;
+    left: 0;
+    right: 0;
+    opacity: 1;
+}
+
+.card:hover .member-icons {
+  bottom: 0;
+  opacity: 1;
+}
+
+.animate {
+  transition: all 0.4s ease-in-out;
+}
+
+@media (max-width: 800px) {
+  .btn {
+    padding: 2px 4px;
+    font-size: 80%;
+    line-height: 1;
+  }
+}
+
+@media (max-width: 400px) {
+  .btn {
+    padding: 2px 4px;
+    font-size: 150%;
+    line-height: 1;
+  }
 }

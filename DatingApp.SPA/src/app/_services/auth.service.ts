@@ -7,6 +7,7 @@ import { AuthData } from '../_models/authData';
 import { AlertifyService } from './alertify.service';
 import { tokenNotExpired, JwtHelper } from 'angular2-jwt';
 import { environment } from '../../environments/environment';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 
 
@@ -16,7 +17,7 @@ export class AuthService {
 
   userToken: any;
   decodeToken: any;
-  jwtHelper: JwtHelper = new JwtHelper();
+  jwtHelper: JwtHelperService = new JwtHelperService();
   redirectUrl = '';
 
   constructor(
@@ -33,7 +34,9 @@ export class AuthService {
       if (user.tokenString) {
         this.userToken = user.tokenString;
         localStorage.setItem('JwSToken', user.tokenString);
+
         this.decodeToken = this.jwtHelper.decodeToken(user.tokenString);
+
         console.log (this.decodeToken);
         this.route.queryParams.subscribe(
           params => (this.redirectUrl = params['return'])  );

@@ -5,13 +5,13 @@ import { Observable } from 'rxjs/Observable';
 import { User } from '../_models/User';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Headers, RequestOptions } from '@angular/http';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { AuthHttp } from 'angular2-jwt';
 
 
 @Injectable()
 export class UserService {
   baseURL = environment.apiUrl;
-
-  headers = new HttpHeaders({ Authorization: 'Bearer ' + this.jWt() });
 
   constructor(
     private _httpClient: HttpClient,
@@ -19,13 +19,11 @@ export class UserService {
   ) {}
 
   getUsers() {
-    return this._httpClient.get<Array<User>>(this.baseURL + 'UserData/users', { headers: this.headers});
+    return this._httpClient.get<Array<User>>(this.baseURL + 'UserData/users');
   }
 
-  private jWt() {
-    const token = localStorage.getItem('JwSToken');
-    if (token) {
-      return token;
-    }
+  getUser(id: string) {
+    return this._httpClient.get<User>(this.baseURL + 'UserData/' + id);
   }
+
 }
