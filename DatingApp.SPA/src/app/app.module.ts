@@ -1,3 +1,4 @@
+import {NgxGalleryModule} from 'ngx-gallery';
 import {TabsModule} from 'ngx-bootstrap/tabs';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -47,7 +48,8 @@ import { MemberListResolver } from './_resolve/member-list.resolver';
     HttpModule,
     AppRoutingModule,
     BsDropdownModule.forRoot(), TabsModule.forRoot(),
-    AuthModule
+    AuthModule,
+    NgxGalleryModule
   ],
   providers: [
     AuthService,
