@@ -12,7 +12,6 @@ import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { AppRoutingModule } from './app.routing.module';
 import { LoginComponent } from './login/login.component';
-import { GuardLoginService } from './login/guardLogin.service';
 import { AlertifyService } from './_services/alertify.service';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { MessagesComponent } from './messages/messages.component';
@@ -24,6 +23,10 @@ import { AuthModule } from './_services/auth/auth.module';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 import { MemberDetailResolver } from './_resolve/member-detail.resolver';
 import { MemberListResolver } from './_resolve/member-list.resolver';
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
+import { MemberEditResolver } from './_resolve/member-edit.resolver';
+import { PreventUnSaveGuard } from './_guards/preventUnSave.guard';
+import { GuardLoginService } from './_guards/guardLogin.guard';
 
 
 
@@ -35,11 +38,9 @@ import { MemberListResolver } from './_resolve/member-list.resolver';
     HomeComponent,
     RegisterComponent,
     LoginComponent,
-    MemberListComponent,
-    MemberCardComponent,
+    MemberListComponent, MemberCardComponent, MemberDetailComponent, MemberEditComponent,
     MessagesComponent,
-    ListsComponent,
-    MemberDetailComponent
+    ListsComponent
   ],
   imports: [
     BrowserModule,
@@ -53,10 +54,10 @@ import { MemberListResolver } from './_resolve/member-list.resolver';
   ],
   providers: [
     AuthService,
-    GuardLoginService,
+    GuardLoginService, PreventUnSaveGuard,
     AlertifyService,
     UserService,
-    MemberDetailResolver, MemberListResolver
+    MemberDetailResolver, MemberListResolver, MemberEditResolver
   ],
   bootstrap: [AppComponent]
 })

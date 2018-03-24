@@ -19,7 +19,7 @@ export class NavComponent implements OnInit {
   constructor(private _authService: AuthService, private  _alert: AlertifyService) {}
 
   ngOnInit() {
-    this.uniqueName = this.uniqueName = this._authService.decodeToken.unique_name;
+    this.uniqueName = this._authService.decodeToken.unique_name;
   }
 
   login(loginForm: NgForm) {

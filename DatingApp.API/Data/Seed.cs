@@ -16,25 +16,25 @@ namespace DatingApp.API.Data
 
         public void SeedUsers (){
 
-            _dataContext.Users.RemoveRange(_dataContext.Users);
-            _dataContext.SaveChanges();
+            //_dataContext.Users.RemoveRange(_dataContext.Users);
+            //_dataContext.SaveChanges();
 
             //Seed users ang Generate password
 
-            var userData = System.IO.File.ReadAllText("./Data/SeedData.json");
-            var users = JsonConvert.DeserializeObject<List<User>>(userData);
+           // var userData = System.IO.File.ReadAllText("./Data/SeedData.json");
+           // var users = JsonConvert.DeserializeObject<List<User>>(userData);
 
-            foreach (var user in users)
-            {     
-                 byte[] passwordHash, passwordSalt;
-                 CreatePasswordHash("password", out passwordHash, out passwordSalt);
+            // foreach (var user in users)
+            // {     
+            //      byte[] passwordHash, passwordSalt;
+            //      CreatePasswordHash("password", out passwordHash, out passwordSalt);
 
-                  user.PasswordHash = passwordHash;
-                  user.PasswordSalt = passwordSalt;
+            //       user.PasswordHash = passwordHash;
+            //       user.PasswordSalt = passwordSalt;
 
-                  _dataContext.Add(user);
-                  _dataContext.SaveChanges();
-            }
+            //       _dataContext.Add(user);
+            //       _dataContext.SaveChanges();
+            // }
 
 
 

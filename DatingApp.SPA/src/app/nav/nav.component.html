@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary" role="navigation">
 
   <div class="container">
-<a class="navbar-brand" [routerLink]="[ '']">Home</a>
+    <a class="navbar-brand" [routerLink]="[ '']">Home</a>
 
     <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
       &#9776;
@@ -26,36 +26,28 @@
         </li>
 
 
-        <li class="nav-item dropdown" dropdown>
-
-          <a class="nav-link" dropdownToggle>Click me for a dropdown, yo!</a>
-          <ul *dropdownMenu class="dropdown-menu">
-            <li>
-              <a class="dropdown-item" href="#">1111</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#">2222</a>
-            </li>
-          </ul>
-        </li>
-
         <li class="nav-item">
           <a href="#" class="nav-link">-----</a>
         </li>
       </ul>
+
       <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
+
+
+
+
         <li class="nav-item order-2 order-md-1">
-          <a href="#" class="nav-link" title="settings">
-            <i class="fa fa-cog fa-fw fa-lg"></i>
-          </a>
+
         </li>
+
+
 
         <li *ngIf="!loggedIn()" class="dropdown order-1">
           <button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn btn-outline-secondary dropdown-toggle">Login
             <span class="caret"></span>
           </button>
 
-          <ul  class="dropdown-menu dropdown-menu-right mt-1">
+          <ul class="dropdown-menu dropdown-menu-right mt-1">
             <li class="p-3">
 
               <form #loginForm="ngForm" (ngSubmit)="login(loginForm)" class="form" role="form">
@@ -68,7 +60,7 @@
                     type="text">
                 </div>
                 <div class="form-group">
-                  <button  type="submit" class="btn btn-primary btn-block" [disabled]="!loginForm.valid" (click)="login()">Login</button>
+                  <button type="submit" class="btn btn-primary btn-block" [disabled]="!loginForm.valid" (click)="login()">Login</button>
                 </div>
                 <div class="form-group text-xs-center">
                   <small>
@@ -80,9 +72,22 @@
             </li>
           </ul>
         </li>
-        <li *ngIf="loggedIn()" class="nav-item myLogOut">
-          <a (click)="logOut()" class="nav-link ">Wyloguj {{uniqueName}} | </a>
+
+
+        <li *ngIf="loggedIn()" class="nav-item dropdown" dropdown>
+          <a class="nav-link" dropdownToggle>
+            <i class="fa fa-cog fa-fw fa-lg"> </i> Profil </a>
+          <div *dropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" [routerLink]="[ '/member/edit']">
+              <i class="fa fa-user"></i> Edytuj profil</a>
+            <a class="dropdown-item">
+              <i class="fa fa-user"></i> ---- </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" (click)="logOut()">Wyloguj się</a>
+          </div>
         </li>
+
+
       </ul>
     </div>
   </div>

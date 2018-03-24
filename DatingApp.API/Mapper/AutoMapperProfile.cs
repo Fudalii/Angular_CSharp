@@ -31,6 +31,7 @@ namespace DatingApp.API.Mapper
                 .ForMember(dest => dest.PasswordSalt, opt => opt.Ignore());
 
             CreateMap<Photos, PhotoForDetaisDto>();
+            CreateMap<UserForUpdateDTO, User>();
         }
 
 

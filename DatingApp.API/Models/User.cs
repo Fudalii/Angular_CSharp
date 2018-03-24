@@ -18,7 +18,7 @@ namespace DatingApp.API.Models
         public DateTime LastActivate { get; set; }
         public string LookingFor  { get; set; }  // LookinFor from User.cs
         public string Interests { get; set; } 
-        public string City { get; set; } 
+        public string City { get; set; }  
         public string Country { get; set; } 
 
         // One tu many Left
