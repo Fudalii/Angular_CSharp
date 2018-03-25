@@ -54,7 +54,7 @@ namespace DatingApp.API.Controllers
             if (user.Id != curentUserId)
                 return Unauthorized();
 
-
+            //Przesłany plik 
             var file = photoDTO.File; // Present file in HTTP REQUEST
 
             // ImagUpLoadResult  to tez klasa Cloudinary
@@ -68,7 +68,7 @@ namespace DatingApp.API.Controllers
                     {
                         File = new FileDescription(file.Name, stream)
                     };
-
+                    // wysyłamy zdjęcie do Cloudinary 
                     uploadResult = _cloudinary.Upload(uploadParams);
                 }
             }  
@@ -109,6 +109,9 @@ namespace DatingApp.API.Controllers
 
             return Ok(photo);
         }   
+
+
+     
 
      
        

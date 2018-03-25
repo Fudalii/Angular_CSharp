@@ -27,6 +27,8 @@ import { MemberEditComponent } from './members/member-edit/member-edit.component
 import { MemberEditResolver } from './_resolve/member-edit.resolver';
 import { PreventUnSaveGuard } from './_guards/preventUnSave.guard';
 import { GuardLoginService } from './_guards/guardLogin.guard';
+import { MemberPhotoEditComponent } from './members/member-edit/member-photo-edit/member-photo-edit.component';
+import { FileUploadModule } from 'ng2-file-upload';
 
 
 
@@ -38,7 +40,7 @@ import { GuardLoginService } from './_guards/guardLogin.guard';
     HomeComponent,
     RegisterComponent,
     LoginComponent,
-    MemberListComponent, MemberCardComponent, MemberDetailComponent, MemberEditComponent,
+    MemberListComponent, MemberCardComponent, MemberDetailComponent, MemberEditComponent, MemberPhotoEditComponent,
     MessagesComponent,
     ListsComponent
   ],
@@ -50,7 +52,8 @@ import { GuardLoginService } from './_guards/guardLogin.guard';
     AppRoutingModule,
     BsDropdownModule.forRoot(), TabsModule.forRoot(),
     AuthModule,
-    NgxGalleryModule
+    NgxGalleryModule,
+    FileUploadModule
   ],
   providers: [
     AuthService,

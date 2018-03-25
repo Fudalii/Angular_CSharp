@@ -9,6 +9,8 @@ export class PreventUnSaveGuard implements CanDeactivate<MemberEditComponent> {
 
       if (component.editForm.dirty) {
         return confirm('Czy na pewno opuić stronę. Wygląda na to, że nie dane był zmieniane i nie zostały zapisane ??');
+      } else {
+        return true;
       }
 
   }
