@@ -7,16 +7,16 @@ import { AlertifyService } from '../_services/alertify.service';
 import { User } from '../_models/User';
 
 @Component({
-  selector: "app-nav",
-  templateUrl: "./nav.component.html",
-  styleUrls: ["./nav.component.less"]
+  selector: 'app-nav',
+  templateUrl: './nav.component.html',
+  styleUrls: ['./nav.component.less']
 })
-export class NavComponent implements OnInit, AfterContentChecked, DoCheck {
+export class NavComponent implements OnInit {
   model: AuthData = new AuthData();
   // userName = localStorage.getItem('userName');
 
   uniqueName: any;
-  urlPhoto: any;
+  urlPhoto: string;
 
   constructor(
     private _authService: AuthService,
@@ -24,20 +24,21 @@ export class NavComponent implements OnInit, AfterContentChecked, DoCheck {
   ) {}
 
   ngOnInit() {
-    this.uniqueName = this._authService.decodeToken.unique_name;
+      // subskrybuję observable z seriwsu dla mainPhotoURL
+      this._authService.curentPhotoUrl.subscribe( photoUrl => this.urlPhoto = photoUrl);
   }
 
   // ngDoCheck() {
   //   this.urlPhoto = this._authService.curentUser.photoUrl;
   // }
 
-  ngAfterContentChecked() {
-     this.urlPhoto = this._authService.curentUser.photoUrl;
-  }
+  // ngAfterContentChecked() {
+  //    this.urlPhoto = this._authService.curentUser.photoUrl;
+  // }
 
   login(loginForm: NgForm) {
-    this.model.username = loginForm.controls["username"].value;
-    this.model.password = loginForm.controls["password"].value;
+    this.model.username = loginForm.controls['username'].value;
+    this.model.password = loginForm.controls['password'].value;
     this._authService.login(this.model);
   }
 
@@ -46,8 +47,9 @@ export class NavComponent implements OnInit, AfterContentChecked, DoCheck {
   }
 
   logOut() {
-    localStorage.removeItem("JwSToken");
-    this._alert.message("Wylogowano poprawnie");
+    localStorage.removeItem('JwSToken');
+    localStorage.removeItem('userToRetturn');
+    this._alert.message('Wylogowano poprawnie');
   }
 }
 

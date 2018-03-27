@@ -46,7 +46,7 @@ namespace DatingApp.API.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPost] 
         public  async Task<IActionResult> AddPhotoForUser(int userId, PhotoForCreationDTO photoDTO)
         {
             var user = await _repo.GetUser(userId);

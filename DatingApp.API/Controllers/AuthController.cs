@@ -64,10 +64,6 @@ namespace DatingApp.API.Controllers
         {
             var userFromRepo = await _repo.Login(userForLogin.username.ToLower(), userForLogin.password);
 
-            // nie wiem czemu ale user zwrócony z powyższej metody nie mapuje się na kouncy
-            // dlatego odwołałem się do repo user-data
-            var userok = await _userDataRepository.GetUser(userFromRepo.Id); 
-
             if (userFromRepo == null)
             //return Unauthorized(); 
             return  BadRequest("Nie znaleziono użytkownika");

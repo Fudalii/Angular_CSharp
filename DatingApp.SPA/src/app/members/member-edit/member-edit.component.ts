@@ -18,6 +18,7 @@ export class MemberEditComponent implements OnInit {
   @ViewChild('photos') mainPhoto: MemberPhotoEditComponent;
 
   user: User;
+  photoUrl: string;
 
   constructor(
     private _route: ActivatedRoute,
@@ -31,11 +32,11 @@ export class MemberEditComponent implements OnInit {
       data => (this.user = data['user']),
       error => this._alert.error('Wystąpił błąd')
     );
+    this._authService.curentPhotoUrl.subscribe( p => this.photoUrl = p);
   }
 
   updateUser() {
-    console.log('ok');
-    console.log(this.user);
+
     this._userService
       .updateUser(this.user.id, this.user)
       .subscribe(
@@ -48,7 +49,7 @@ export class MemberEditComponent implements OnInit {
   }
 
   updateMainPhoto(photoUrl) {
-      this.user.photoUrl = photoUrl;
+      this._authService.changeMemberPhoto(photoUrl);
       this._authService.curentUser.photoUrl = photoUrl;
 
   }

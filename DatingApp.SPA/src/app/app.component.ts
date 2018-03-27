@@ -27,6 +27,7 @@ ngOnInit() {
   if (curentUser) {
      this.authService.curentUser = JSON.parse(curentUser);
      this.urlMainPhoto = this.authService.curentUser.photoUrl;
+     this.authService.changeMemberPhoto(this.urlMainPhoto);
   }
 }
 

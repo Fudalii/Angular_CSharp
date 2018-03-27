@@ -9,6 +9,7 @@ import { tokenNotExpired, JwtHelper } from 'angular2-jwt';
 import { environment } from '../../environments/environment';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { User } from '../_models/User';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 
 
@@ -22,6 +23,9 @@ export class AuthService {
   redirectUrl = '';
   curentUser: User;
 
+  private photoUrl = new BehaviorSubject<string>('../../assets/default-thumbnail.gif');
+  curentPhotoUrl = this.photoUrl.asObservable();
+
   constructor(
     private httpClient: HttpClient,
     private route: ActivatedRoute,
@@ -29,16 +33,16 @@ export class AuthService {
     private alert: AlertifyService
   ) {}
 
+  changeMemberPhoto(photoUrl: string) {
+    this.photoUrl.next(photoUrl);
+  }
+
   login(model: AuthData) {
     return this.httpClient.post(this.baseURL + 'auth/login', model).subscribe(x => {
 
       const user = JSON.parse(JSON.stringify(x));
-      console.log(user);
-      console.log(user.tokenString);
      // console.log(user.userToRetturn);
-      this.curentUser = user.userToRetturn;
-      console.log('ok');
-      console.log(JSON.stringify(this.curentUser));
+
 
       if (user.tokenString) {
 
@@ -49,9 +53,9 @@ export class AuthService {
 
         this.decodeToken = this.jwtHelper.decodeToken(user.tokenString);
 
-        this.curentUser = this.jwtHelper.decodeToken(user.userToRetturn);
+        this.curentUser = user.userToRetturn;
 
-
+        this.changeMemberPhoto(this.curentUser.photoUrl);
 
         this.route.queryParams.subscribe(
           params => (this.redirectUrl = params['return'])  );

@@ -52,7 +52,8 @@ export class MemberPhotoEditComponent implements OnInit {
 
     this.uploader.onSuccessItem = (item, response, status, headers) => {
 
-        console.log(response);
+        //console.log(response);
+
         if (response) {
           const res: Photos = JSON.parse(response);
           const photo = {
