@@ -4,6 +4,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using DatingApp.API.Data;
 using DatingApp.API.DTO;
 using DatingApp.API.Models;
@@ -16,8 +17,12 @@ namespace DatingApp.API.Controllers
     public class AuthController : Controller
     {
         private readonly IAuthRepository _repo;
-        public AuthController(IAuthRepository repo)
+        private readonly IMapper _mapper;
+        private readonly IUserDataRepository _userDataRepository;
+        public AuthController(IAuthRepository repo, IMapper mapper, IUserDataRepository userDataRepository)
         {
+            _userDataRepository = userDataRepository;
+                _mapper = mapper;
                 _repo = repo;
         }
 
@@ -59,14 +64,18 @@ namespace DatingApp.API.Controllers
         {
             var userFromRepo = await _repo.Login(userForLogin.username.ToLower(), userForLogin.password);
 
+            // nie wiem czemu ale user zwrócony z powyższej metody nie mapuje się na kouncy
+            // dlatego odwołałem się do repo user-data
+            var userok = await _userDataRepository.GetUser(userFromRepo.Id); 
+
             if (userFromRepo == null)
-            //return Unauthorized();
+            //return Unauthorized(); 
             return  BadRequest("Nie znaleziono użytkownika");
             
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes("Super tajny Key Key Key");
-             var tokenDescriptor = new SecurityTokenDescriptor
+            var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
@@ -80,9 +89,11 @@ namespace DatingApp.API.Controllers
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
             var tokenString = tokenHandler.WriteToken(token);
+           
+            var userToRetturn = _mapper.Map<UserForListDto>(userFromRepo);
 
-            return Ok(new { tokenString });
-        }
+            return Ok(new { tokenString, userToRetturn });
+        } 
 
 
 

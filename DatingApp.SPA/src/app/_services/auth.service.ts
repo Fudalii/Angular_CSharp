@@ -8,6 +8,7 @@ import { AlertifyService } from './alertify.service';
 import { tokenNotExpired, JwtHelper } from 'angular2-jwt';
 import { environment } from '../../environments/environment';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { User } from '../_models/User';
 
 
 
@@ -19,6 +20,7 @@ export class AuthService {
   decodeToken: any;
   jwtHelper: JwtHelperService = new JwtHelperService();
   redirectUrl = '';
+  curentUser: User;
 
   constructor(
     private httpClient: HttpClient,
@@ -29,15 +31,28 @@ export class AuthService {
 
   login(model: AuthData) {
     return this.httpClient.post(this.baseURL + 'auth/login', model).subscribe(x => {
-      console.log(model);
+
       const user = JSON.parse(JSON.stringify(x));
+      console.log(user);
+      console.log(user.tokenString);
+     // console.log(user.userToRetturn);
+      this.curentUser = user.userToRetturn;
+      console.log('ok');
+      console.log(JSON.stringify(this.curentUser));
+
       if (user.tokenString) {
+
         this.userToken = user.tokenString;
-        localStorage.setItem('JwSToken', user.tokenString);
+
+        localStorage.setItem('JwSToken', user.tokenString); // Token striong z API
+        localStorage.setItem('userToRetturn', JSON.stringify(user.userToRetturn)); // user z API
 
         this.decodeToken = this.jwtHelper.decodeToken(user.tokenString);
 
-        console.log (this.decodeToken);
+        this.curentUser = this.jwtHelper.decodeToken(user.userToRetturn);
+
+
+
         this.route.queryParams.subscribe(
           params => (this.redirectUrl = params['return'])  );
         this.router.navigateByUrl(this.redirectUrl || '' );

@@ -30,4 +30,8 @@ export class UserService {
     return this._httpClient.put<User>(this.baseURL + 'UserData/' + id, body );
   }
 
+  setMainPhoto(userid: User, id: number) {
+    return this._httpClient.post(this.baseURL + 'users/' + userid + '/photos/' + id + '/isMain', '');
+  }
+
 }

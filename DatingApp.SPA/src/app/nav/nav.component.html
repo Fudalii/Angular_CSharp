@@ -74,7 +74,10 @@
         </li>
 
 
-        <li *ngIf="loggedIn()" class="nav-item dropdown" dropdown>
+        <li *ngIf="loggedIn()" class="nav-item dropdown myNavItemLogin" dropdown>
+          <div class="myMinThumb">
+            <img src="{{urlPhoto}}" alt="">
+          </div>
           <a class="nav-link" dropdownToggle>
             <i class="fa fa-cog fa-fw fa-lg"> </i> Profil </a>
           <div *dropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdown">

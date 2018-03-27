@@ -71,7 +71,8 @@ namespace DatingApp.API.Controllers
                 {
                     var uploadParams = new ImageUploadParams()
                     {
-                        File = new FileDescription(file.Name, stream)
+                        File = new FileDescription(file.Name, stream),
+                        Transformation = new Transformation().Width(1000).Height(1000).Crop("fill").Gravity("face")
                     };
                     // wysyłamy zdjęcie do Cloudinary 
                     uploadResult = _cloudinary.Upload(uploadParams);
@@ -138,12 +139,15 @@ namespace DatingApp.API.Controllers
             photoFromRepo.IsMain = true;
 
             if (await _repo.SaveAll())
-                return NoContent();
+                return NoContent(); 
             
             return BadRequest("ble ble ble");
              
         }
       
+
+        
+
 
 
 
