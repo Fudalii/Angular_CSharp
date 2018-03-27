@@ -23,12 +23,6 @@ namespace DatingApp.API.Models
 
         // One tu many Left
         public IList<Photos> Photos { get; set; }
-      
-     
-
-
-
-    
 
      
     }
