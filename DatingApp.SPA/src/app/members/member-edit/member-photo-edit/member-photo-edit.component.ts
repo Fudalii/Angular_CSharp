@@ -4,6 +4,7 @@ import { FileUploader } from 'ng2-file-upload';
 import { environment } from '../../../../environments/environment';
 import { AuthService } from '../../../_services/auth.service';
 import { UserService } from '../../../_services/user.service';
+import { AlertifyService } from '../../../_services/alertify.service';
 
 
 @Component({
@@ -27,7 +28,8 @@ export class MemberPhotoEditComponent implements OnInit {
 
   constructor(
     private _authService: AuthService,
-    private _userService: UserService
+    private _userService: UserService,
+    private _alert: AlertifyService
   ) {}
 
   ngOnInit() {
@@ -52,8 +54,6 @@ export class MemberPhotoEditComponent implements OnInit {
 
     this.uploader.onSuccessItem = (item, response, status, headers) => {
 
-        //console.log(response);
-
         if (response) {
           const res: Photos = JSON.parse(response);
           const photo = {
@@ -64,8 +64,6 @@ export class MemberPhotoEditComponent implements OnInit {
             isMain: res.isMain
           };
           this.photos.push(photo);
-          console.log(this.photos);
-
         }
       };
     }
@@ -82,5 +80,20 @@ export class MemberPhotoEditComponent implements OnInit {
         this.getPhotoOutput.emit(photo.url);
     } );
   }
+
+  deletePhoto(id: number) {
+
+       this._userService.deletePhoto( this._authService.decodeToken.nameid , id)
+      .subscribe( x => {
+
+        const indexDeletePhoto = this.photos.findIndex( photo => photo.id === id);
+
+        this.photos.splice(indexDeletePhoto, 1);
+
+        this._alert.success('Zdjęcie usunięte');
+
+      } );
+  }
+
 
 }

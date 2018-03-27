@@ -34,4 +34,8 @@ export class UserService {
     return this._httpClient.post(this.baseURL + 'users/' + userid + '/photos/' + id + '/isMain', '');
   }
 
+  deletePhoto(userid: User, id: number) {
+    return this._httpClient.delete(this.baseURL + 'users/' + userid + '/photos/' + id + '/delete');
+  }
+
 }

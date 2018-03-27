@@ -93,10 +93,11 @@ namespace DatingApp.API.Controllers
 
             user.Photos.Add(photo);
 
-            var photoToReturn = _mapper.Map<PhotoForReturnDTO>(photo);
+            // var photoToReturn = _mapper.Map<PhotoForReturnDTO>(photo);  PRZENIESIONE DO Ifa poniżej aby pobierane było z ID
 
             if (await _repo.SaveAll())
             {
+                var photoToReturn = _mapper.Map<PhotoForReturnDTO>(photo); // tutaj juz każde photo ma ID
                 return CreatedAtRoute("GetPhoto", new {id = photo.Id}, photoToReturn);  // TUTAJ WSTAWIONY będzie przekierowanie do GetPhoto
             }
 
@@ -151,7 +152,7 @@ namespace DatingApp.API.Controllers
 
 
 
-        [HttpDelete("{id}/delete")]
+        [HttpDelete("{id}/delete")] 
         public async Task<IActionResult> DeletePhoto(int userId, int id)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))

@@ -7,6 +7,7 @@ import { UserService } from '../../_services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MemberPhotoEditComponent } from './member-photo-edit/member-photo-edit.component';
 import { AuthService } from '../../_services/auth.service';
+import { Photos } from '../../_models/Photos.ts';
 
 @Component({
   selector: 'app-member-edit',
@@ -15,7 +16,7 @@ import { AuthService } from '../../_services/auth.service';
 })
 export class MemberEditComponent implements OnInit {
   @ViewChild('editForm') editForm: NgForm;
-  @ViewChild('photos') mainPhoto: MemberPhotoEditComponent;
+
 
   user: User;
   photoUrl: string;
@@ -33,6 +34,7 @@ export class MemberEditComponent implements OnInit {
       error => this._alert.error('Wystąpił błąd')
     );
     this._authService.curentPhotoUrl.subscribe( p => this.photoUrl = p);
+    console.log(this.user.photos);
   }
 
   updateUser() {
