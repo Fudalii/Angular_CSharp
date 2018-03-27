@@ -15,5 +15,5 @@ export interface User {
   introduction?: string;
   lookingFor?: string;
   photos: Photos[];
-  lastActivate: Date;
+  lastActivate: Date; 
 }

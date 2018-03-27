@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-6 mx-auto">
 
-      <form class="form-signin" #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+      <form class="form-signin" [formGroup]="registerForm"  (ngSubmit)="register()">
         <div class="text-center mb-4">
           <p class="fa fa-edit fa-3x"></p>
           <h1 class="h3 mb-3 font-weight-normal">REJESTRACJA</h1>
@@ -12,23 +12,68 @@
           </p>
         </div>
 
+        <div>
+          <label for="">I am a:</label>
+          <label for="">
+            <input type="radio" value="male" formControlName="gender"> Male
+          </label>
+            <label for="">
+              <input type="radio" value="female" formControlName="gender">Female
+            </label>
+        </div>_
+
         <div class="form-label-group">
-          <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="" name="username"
-            [(ngModel)]="userData.username">
           <label for="inputEmail">Email address</label>
+          <input type="email" id="inputEmail" class="form-control" placeholder="Email address"  autofocus=""
+          formControlName="username"
+          [ngClass]="{'myError': registerForm.get('username').errors && registerForm.get('username').touched  }" >
+          <span class="help-block" *ngIf=" registerForm.get('username').errors && registerForm.get('username').touched">Ble ble</span>
+        </div>
+
+          <div class="form-label-group">
+            <label for="inputEmail">Know As</label>
+            <input type="text" class="form-control" placeholder="Email address" autofocus="" formControlName="knowAs"
+              [ngClass]="{'myError': registerForm.get('knowAs').errors && registerForm.get('knowAs').touched  }">
+            <span class="help-block" *ngIf=" registerForm.get('knowAs').errors && registerForm.get('knowAs').touched">Ble ble</span>
+          </div>
+
+            <div class="form-label-group">
+            <label for="inputEmail">Date of birth</label>
+
+            <input bsDatepicker  [bsConfig]="bsConfig" type="text" class="form-control" placeholder="Email address" autofocus="" formControlName="dateOfBirth"
+              [ngClass]="{'myError': registerForm.get('dateOfBirth').errors && registerForm.get('dateOfBirth').touched  }">
+            <span class="help-block" *ngIf=" registerForm.get('dateOfBirth').errors && registerForm.get('dateOfBirth').touched">Ble ble</span>
+          </div>
+ 
+            <div class="form-label-group">
+            <label for="inputEmail">City </label>
+            <input type="text" class="form-control" placeholder="Email address" autofocus="" formControlName="city"
+              [ngClass]="{'myError': registerForm.get('city').errors && registerForm.get('city').touched  }">
+            <span class="help-block" *ngIf=" registerForm.get('city').errors && registerForm.get('city').touched">Ble ble</span>
+          </div>
+
+            <div class="form-label-group">
+            <label for="inputEmail">Country</label>
+            <input type="text" class="form-control" placeholder="Email address" autofocus="" formControlName="country"
+              [ngClass]="{'myError': registerForm.get('country').errors && registerForm.get('country').touched  }">
+            <span class="help-block" *ngIf=" registerForm.get('country').errors && registerForm.get('country').touched">Ble ble</span>
+          </div>
+
+        <div class="form-label-group">
+          <label for="inputPassword">Password</label>
+          <input type="password" id="inputPassword" class="form-control" placeholder="Password"  formControlName="password">
+          <span class="help-block" *ngIf=" registerForm.get('password').errors && registerForm.get('password').touched">Minimum 3 znaki</span>
+          <span class="help-block" *ngIf=" registerForm.get('password').errors && registerForm.get('password').touched">Maximum 8 znaków</span>
         </div>
 
         <div class="form-label-group">
-          <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="" name="password" [(ngModel)]="userData.password">
           <label for="inputPassword">Password</label>
-        </div>
+          <input type="password" id="confirmPassword" class="form-control" placeholder="Password" formControlName="confirmpassword">
+          <span class="help-block"
+          *ngIf="registerForm.get('confirmpassword').touched
+          && registerForm.hasError('passwordCheck')">
+          Hasła nie są identyczne</span>
 
-        <div class="form-group">
-
-          <label for="favoriteValue">Jaka jest twoja ulubiona wartosć</label>
-          <select class="form-control" id="favoriteValue">
-            <option *ngFor="let value of valuesFromHome">{{value.name}}</option>
-          </select>
         </div>
 
         <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!registerForm.valid">Zarejestruj się </button>
@@ -38,3 +83,9 @@
     </div>
   </div>
 </div>
+
+<pre>
+  <p>{{registerForm.value | json}}</p>
+  <p>{{registerForm.status | json}}</p>
+
+</pre>

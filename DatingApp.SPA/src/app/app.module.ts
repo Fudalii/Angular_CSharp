@@ -1,9 +1,10 @@
+import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
 import {NgxGalleryModule} from 'ngx-gallery';
 import {TabsModule} from 'ngx-bootstrap/tabs';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NavComponent } from './nav/nav.component';
 import { AuthService } from './_services/auth.service';
@@ -40,7 +41,11 @@ import { FileUploadModule } from 'ng2-file-upload';
     HomeComponent,
     RegisterComponent,
     LoginComponent,
-    MemberListComponent, MemberCardComponent, MemberDetailComponent, MemberEditComponent, MemberPhotoEditComponent,
+    MemberListComponent,
+    MemberCardComponent,
+    MemberDetailComponent,
+    MemberEditComponent,
+    MemberPhotoEditComponent,
     MessagesComponent,
     ListsComponent
   ],
@@ -50,17 +55,23 @@ import { FileUploadModule } from 'ng2-file-upload';
     HttpClientModule,
     HttpModule,
     AppRoutingModule,
-    BsDropdownModule.forRoot(), TabsModule.forRoot(),
+    BsDropdownModule.forRoot(),
+    TabsModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     AuthModule,
     NgxGalleryModule,
-    FileUploadModule
+    FileUploadModule,
+    ReactiveFormsModule
   ],
   providers: [
     AuthService,
-    GuardLoginService, PreventUnSaveGuard,
+    GuardLoginService,
+    PreventUnSaveGuard,
     AlertifyService,
     UserService,
-    MemberDetailResolver, MemberListResolver, MemberEditResolver
+    MemberDetailResolver,
+    MemberListResolver,
+    MemberEditResolver
   ],
   bootstrap: [AppComponent]
 })
