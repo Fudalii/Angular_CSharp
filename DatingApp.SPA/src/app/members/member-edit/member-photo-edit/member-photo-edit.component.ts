@@ -22,6 +22,8 @@ export class MemberPhotoEditComponent implements OnInit {
 
   curentMain: Photos;
 
+  photoUrl: string;
+
 
   public uploader: FileUploader = new FileUploader({});
   public hasBaseDropZoneOver = false;
@@ -64,7 +66,14 @@ export class MemberPhotoEditComponent implements OnInit {
             isMain: res.isMain
           };
           this.photos.push(photo);
+
+          if (photo.isMain) {
+            this._authService.changeMemberPhoto(photo.url);
+            this._authService.curentUser.photoUrl = photo.url;
+            localStorage.setItem('userToRetturn', JSON.stringify(this._authService.curentUser));
+          }
         }
+
       };
     }
 
@@ -77,7 +86,12 @@ export class MemberPhotoEditComponent implements OnInit {
         this.curentMain = this.photos.find( x => x.isMain === true);
         this.curentMain.isMain = false;
         photo.isMain = true;
-        this.getPhotoOutput.emit(photo.url);
+
+       this._authService.changeMemberPhoto(photo.url);
+       this._authService.curentUser.photoUrl = photo.url;
+       localStorage.setItem('userToRetturn', JSON.stringify(this._authService.curentUser));
+
+        //this._authService.curentPhotoUrl.subscribe(p => (this.urlPhoto = p));
     } );
   }
 

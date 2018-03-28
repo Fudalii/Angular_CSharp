@@ -25,16 +25,18 @@
         <div class="form-label-group">
           <label for="inputEmail">Email address</label>
           <input type="email" id="inputEmail" class="form-control" placeholder="Email address"  autofocus=""
-          formControlName="username"
-          [ngClass]="{'myError': registerForm.get('username').errors && registerForm.get('username').touched  }" >
-          <span class="help-block" *ngIf=" registerForm.get('username').errors && registerForm.get('username').touched">Ble ble</span>
+          formControlName="userName"
+ [ngClass]="{'myError': registerForm.get('userName').errors && registerForm.get('userName').touched }" >
+
+<span class="help-block" *ngIf=" registerForm.get('userName').errors && registerForm.get('userName').touched">Ble ble</span>
+
         </div>
 
           <div class="form-label-group">
             <label for="inputEmail">Know As</label>
-            <input type="text" class="form-control" placeholder="Email address" autofocus="" formControlName="knowAs"
-              [ngClass]="{'myError': registerForm.get('knowAs').errors && registerForm.get('knowAs').touched  }">
-            <span class="help-block" *ngIf=" registerForm.get('knowAs').errors && registerForm.get('knowAs').touched">Ble ble</span>
+            <input type="text" class="form-control" placeholder="Email address" autofocus="" formControlName="knownAs"
+              [ngClass]="{'myError': registerForm.get('knownAs').errors && registerForm.get('knownAs').touched  }">
+            <span class="help-block" *ngIf=" registerForm.get('knownAs').errors && registerForm.get('knownAs').touched">Ble ble</span>
           </div>
 
             <div class="form-label-group">
@@ -44,7 +46,7 @@
               [ngClass]="{'myError': registerForm.get('dateOfBirth').errors && registerForm.get('dateOfBirth').touched  }">
             <span class="help-block" *ngIf=" registerForm.get('dateOfBirth').errors && registerForm.get('dateOfBirth').touched">Ble ble</span>
           </div>
- 
+
             <div class="form-label-group">
             <label for="inputEmail">City </label>
             <input type="text" class="form-control" placeholder="Email address" autofocus="" formControlName="city"

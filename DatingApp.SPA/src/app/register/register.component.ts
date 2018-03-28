@@ -3,6 +3,7 @@ import { AuthData } from '../_models/authData';
 import { NgForm, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { AuthService } from '../_services/auth.service';
 import { BsDaterangepickerConfig } from 'ngx-bootstrap/datepicker';
+import { User } from '../_models/User';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +12,8 @@ import { BsDaterangepickerConfig } from 'ngx-bootstrap/datepicker';
 })
 export class RegisterComponent implements OnInit {
 
-  userData = new AuthData(); // model tylko do rejestracji
+  userData: User; // model tylko do rejestracji
+
   registerForm: FormGroup;
 
   @Input() valuesFromHome: any;
@@ -20,11 +22,11 @@ export class RegisterComponent implements OnInit {
 
   bsConfig: Partial<BsDaterangepickerConfig>;
 
-  constructor(private authService: AuthService, private _formBuilder: FormBuilder) {}
+  constructor(private _authService: AuthService, private _formBuilder: FormBuilder) {}
 
   ngOnInit() {
     this.bsConfig = {
-      containerClass: 'theme-red' 
+      containerClass: 'theme-red'
     };
 
     this.buildRegisterForm();
@@ -35,30 +37,36 @@ export class RegisterComponent implements OnInit {
       //   confirmpassword: new FormControl('', Validators.required)
       // } , this.confirmPasswordValidator);
 
-  }_
+  }
 
-  buildRegisterForm(){
-  this.registerForm =  this._formBuilder.group({
-      gender: ['male'],
-      username: ['', [Validators.minLength(3)]],
-      knowAs: ['', Validators.required],
-      dateOfBirth: [null, Validators.required],
-      city: ['', Validators.required],
-      country: ['', Validators.required],
-      password: ['', [Validators.minLength(3), Validators.maxLength(8)]],
-      confirmpassword: ['', [Validators.required]]
-   }, {validator: this.confirmPasswordValidator});
+  buildRegisterForm() {
+
+      this.registerForm =  this._formBuilder.group({
+          gender: ['male'],
+          userName: ['', [Validators.minLength(3)]],
+          knownAs: ['', Validators.required],
+          dateOfBirth: [null, Validators.required],
+          city: ['', Validators.required],
+          country: ['', Validators.required],
+          password: ['', [Validators.minLength(3), Validators.maxLength(8)]],
+          confirmpassword: ['', [Validators.required]]
+      }, {validator: this.confirmPasswordValidator});
+
   }
 
   confirmPasswordValidator(g: FormGroup) {
       return g.get('password').value === g.get('confirmpassword').value ? null : {'passwordCheck' : true};
   }
 
-  register(data: NgForm) {
-    // this.userData.username = data.controls['username'].value;
-    // this.userData.password = data.controls['password'].value;
-    // this.authService.register(this.userData);
-    console.log(this.registerForm.value);
+  register() {
+
+    if (this.registerForm.valid) {
+      this.userData = Object.assign({}, this.registerForm.value);
+      this._authService.register(this.userData);
+
+    }
+
+
   }
 
   cancelRegister() {

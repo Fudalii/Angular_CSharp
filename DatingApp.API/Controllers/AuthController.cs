@@ -27,7 +27,7 @@ namespace DatingApp.API.Controllers
         }
 
 
-    [HttpPost("register")]
+    [HttpPost("register")] 
     public async Task<IActionResult> register([FromBody] UserForRegister userForRegister)  {
         
         // User Exist ??

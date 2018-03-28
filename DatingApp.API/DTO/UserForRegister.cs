@@ -15,7 +15,7 @@ namespace DatingApp.API.DTO
 
         [Required]
         public string  gender { get; set; }
-        
+         
         [Required]
         public string  knownAs { get; set; }
 

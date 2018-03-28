@@ -4,7 +4,7 @@ import { Values } from '../_models/Values';
 import { AuthService } from '../_services/auth.service';
 import { AuthData } from '../_models/authData';
 import { AlertifyService } from '../_services/alertify.service';
-import { User } from '../_models/User';
+import {User} from '../_models/User';
 
 @Component({
   selector: 'app-nav',
@@ -12,10 +12,9 @@ import { User } from '../_models/User';
   styleUrls: ['./nav.component.less']
 })
 export class NavComponent implements OnInit {
-  model: AuthData = new AuthData();
-  // userName = localStorage.getItem('userName');
 
-  uniqueName: any;
+  user: any = {};
+
   urlPhoto: string;
 
   constructor(
@@ -26,20 +25,15 @@ export class NavComponent implements OnInit {
   ngOnInit() {
       // subskrybuję observable z seriwsu dla mainPhotoURL
       this._authService.curentPhotoUrl.subscribe( photoUrl => this.urlPhoto = photoUrl);
+
   }
 
-  // ngDoCheck() {
-  //   this.urlPhoto = this._authService.curentUser.photoUrl;
-  // }
 
-  // ngAfterContentChecked() {
-  //    this.urlPhoto = this._authService.curentUser.photoUrl;
-  // }
 
   login(loginForm: NgForm) {
-    this.model.username = loginForm.controls['username'].value;
-    this.model.password = loginForm.controls['password'].value;
-    this._authService.login(this.model);
+   this.user.userName = loginForm.controls['userName'].value;
+   this.user.password = loginForm.controls['password'].value;
+    this._authService.login(this.user);
   }
 
   loggedIn() {

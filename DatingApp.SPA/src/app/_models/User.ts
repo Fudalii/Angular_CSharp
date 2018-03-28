@@ -3,6 +3,7 @@ import { Photos } from './Photos.ts';
 
 export interface User {
   id: number;
+  password: string;
   userName: string;
   knownAs: string;
   age: number;
@@ -15,5 +16,5 @@ export interface User {
   introduction?: string;
   lookingFor?: string;
   photos: Photos[];
-  lastActivate: Date; 
+  lastActivate: Date;
 }

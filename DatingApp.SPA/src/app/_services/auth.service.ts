@@ -10,6 +10,7 @@ import { environment } from '../../environments/environment';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { User } from '../_models/User';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import { NavComponent } from '../nav/nav.component';
 
 
 
@@ -23,7 +24,8 @@ export class AuthService {
   redirectUrl = '';
   curentUser: User;
 
-  private photoUrl = new BehaviorSubject<string>('../../assets/default-thumbnail.gif');
+  private photoUrl = new BehaviorSubject<string>('');
+
   curentPhotoUrl = this.photoUrl.asObservable();
 
   constructor(
@@ -35,14 +37,16 @@ export class AuthService {
 
   changeMemberPhoto(photoUrl: string) {
     this.photoUrl.next(photoUrl);
+     console.log('photoUrl Login');
+    console.log(photoUrl);
   }
 
-  login(model: AuthData) {
+  login(model: User) {
+    console.log(model);
     return this.httpClient.post(this.baseURL + 'auth/login', model).subscribe(x => {
 
       const user = JSON.parse(JSON.stringify(x));
      // console.log(user.userToRetturn);
-
 
       if (user.tokenString) {
 
@@ -55,7 +59,12 @@ export class AuthService {
 
         this.curentUser = user.userToRetturn;
 
-        this.changeMemberPhoto(this.curentUser.photoUrl);
+
+          if (this.curentUser.photoUrl !== null) {
+            this.changeMemberPhoto(this.curentUser.photoUrl);
+          } else {
+            this.changeMemberPhoto('/assets/default-thumbnail.gif');
+          }
 
         this.route.queryParams.subscribe(
           params => (this.redirectUrl = params['return'])  );
@@ -68,9 +77,13 @@ export class AuthService {
   );
   }
 
-  register(model: AuthData) {
+  register(model: User) {
     return this.httpClient.post(this.baseURL + 'auth/register', model).subscribe(
-      x => console.log(x),
+      x => {
+            this.login(model);
+            this.router.navigate(['/members']);
+      },
+
       (error: HttpErrorResponse) => {this.errorMessege(error); console.log(error); }
     );
   }
