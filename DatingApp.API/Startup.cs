@@ -50,6 +50,8 @@ namespace DatingApp.API
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
 
+            services.AddScoped<LogUserActivity>();
+
             //Dep. Injection List
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IUserDataRepository, UserDataRepository>();

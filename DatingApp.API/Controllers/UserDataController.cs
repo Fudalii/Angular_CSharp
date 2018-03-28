@@ -5,12 +5,14 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DatingApp.API.Data;
 using DatingApp.API.DTO;
+using DatingApp.API.Helpers;
 using DatingApp.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DatingApp.API.Controllers
 {
+    [ServiceFilter(typeof(LogUserActivity))]
     [Authorize]
     [Route("api/[controller]")]
     public class UserDataController : Controller
@@ -53,7 +55,7 @@ namespace DatingApp.API.Controllers
         }
 
 
-        [HttpPut("{id}")]
+        [HttpPut("{id}", Name ="UpdateUser")]
         public async Task<IActionResult> UpdateUser ( int id, [FromBody] UserForUpdateDTO userForUpdate) 
         {
             if (!ModelState.IsValid)

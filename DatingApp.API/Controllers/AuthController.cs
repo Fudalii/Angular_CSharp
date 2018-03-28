@@ -19,8 +19,10 @@ namespace DatingApp.API.Controllers
         private readonly IAuthRepository _repo;
         private readonly IMapper _mapper;
         private readonly IUserDataRepository _userDataRepository;
-        public AuthController(IAuthRepository repo, IMapper mapper, IUserDataRepository userDataRepository)
+        private readonly DataContext _dataContext;
+        public AuthController(IAuthRepository repo, IMapper mapper, IUserDataRepository userDataRepository, DataContext dataContext)
         {
+            _dataContext = dataContext;
             _userDataRepository = userDataRepository;
                 _mapper = mapper;
                 _repo = repo;
@@ -40,16 +42,12 @@ namespace DatingApp.API.Controllers
           ModelState.AddModelError("Username", "Taki user już istnieje"); 
            return BadRequest("Taki user juz istnieje");
         }
-            //return BadRequest(ModelState);
-            //return BadRequest("User exist in database!");
-        
-        // validate request
+
          
          if (!ModelState.IsValid)
-            return BadRequest(ModelState);
-
+            return BadRequest(ModelState); 
           
-        // create user
+            // create user
             var userToCreate = _mapper.Map<User>(userForRegister);
 
             var createUser = await _repo.Register(userToCreate, userForRegister.password);
@@ -71,10 +69,17 @@ namespace DatingApp.API.Controllers
             if (userFromRepo == null)
             //return Unauthorized(); 
             return  BadRequest("Nie znaleziono użytkownika");
-            
+
+                    // var userToUpdate = await _userDataRepository.GetUser(userFromRepo.Id);
+                    
+                    // userToUpdate.LastActivate = DateTime.Now;
+
+                    // await _userDataRepository.SaveAll();
 
             var tokenHandler = new JwtSecurityTokenHandler();
+
             var key = Encoding.ASCII.GetBytes("Super tajny Key Key Key");
+
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]
@@ -87,7 +92,9 @@ namespace DatingApp.API.Controllers
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
                     SecurityAlgorithms.HmacSha512Signature)
             };
+
             var token = tokenHandler.CreateToken(tokenDescriptor);
+
             var tokenString = tokenHandler.WriteToken(token);
            
             var userToRetturn = _mapper.Map<UserForListDto>(userFromRepo);

@@ -17,6 +17,11 @@ namespace DatingApp.API.DTO
         public string Country { get; set; } 
         public string PhotoUrl { get; set; }
 
+        public UserForListDto()
+        {
+            DateTime LastActivate = DateTime.Now;
+        }
+
       
     }
 }

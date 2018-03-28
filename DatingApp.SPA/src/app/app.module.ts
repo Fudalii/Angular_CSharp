@@ -30,6 +30,7 @@ import { PreventUnSaveGuard } from './_guards/preventUnSave.guard';
 import { GuardLoginService } from './_guards/guardLogin.guard';
 import { MemberPhotoEditComponent } from './members/member-edit/member-photo-edit/member-photo-edit.component';
 import { FileUploadModule } from 'ng2-file-upload';
+import { TimeAgoPipe } from 'time-ago-pipe';
 
 
 
@@ -47,7 +48,8 @@ import { FileUploadModule } from 'ng2-file-upload';
     MemberEditComponent,
     MemberPhotoEditComponent,
     MessagesComponent,
-    ListsComponent
+    ListsComponent,
+    TimeAgoPipe
   ],
   imports: [
     BrowserModule,
