@@ -17,9 +17,10 @@ namespace DatingApp.API.Helpers
         {
                 PageSize = pageSize;
                 TotalCount = count;
+                CurentPage = pageNumber;
                 TotalPages = (int)Math.Ceiling(count / (double)pageSize); 
                 this.AddRange(items);
-        }
+        } 
 
 
         public static async Task<PagedList<T>> CreateAsync(IQueryable<T> source, int pageNumber, int pageSize)

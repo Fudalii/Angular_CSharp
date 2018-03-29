@@ -19,7 +19,7 @@ export class UserService {
   ) {}
 
   getUsers() {
-    return this._httpClient.get<Array<User>>(this.baseURL + 'UserData/users');
+    return this._httpClient.get<Array<User>>(this.baseURL + 'UserData/users' + '/?pageNumber=1&pageSize=5');
   }
 
   getUser(id: string) {
