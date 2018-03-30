@@ -31,6 +31,19 @@ namespace DatingApp.API.Controllers
         [HttpGet ("users")]
         public async Task<IActionResult> GetUsers(UserParams userParams){
 
+            // Wykluczenie z listy włąsnego profilu
+            var curentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            
+            var userFromRepo = await _repo.GetUser(curentUserId);
+
+            userParams.UserId = userFromRepo.Id; 
+            
+
+            if (string.IsNullOrEmpty(userParams.Gender))
+            {
+                userParams.Gender = userFromRepo.Gender == "male" ? "female" : "male";
+            }
+           
             var users = await _repo.GetUsers(userParams);
 
             var usersForReturn = _mapper.Map<IList<UserForListDto>>(users);

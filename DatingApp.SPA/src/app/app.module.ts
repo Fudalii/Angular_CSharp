@@ -1,3 +1,4 @@
+import {PaginationModule} from 'ngx-bootstrap/pagination';
 import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
 import {NgxGalleryModule} from 'ngx-gallery';
 import {TabsModule} from 'ngx-bootstrap/tabs';
@@ -60,6 +61,7 @@ import { TimeAgoPipe } from 'time-ago-pipe';
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     BsDatepickerModule.forRoot(),
+    PaginationModule.forRoot(),
     AuthModule,
     NgxGalleryModule,
     FileUploadModule,

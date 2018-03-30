@@ -3,10 +3,11 @@ import { AlertifyService } from './alertify.service';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs/Observable';
 import { User } from '../_models/User';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Headers, RequestOptions } from '@angular/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Headers, RequestOptions, HttpModule } from '@angular/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { AuthHttp } from 'angular2-jwt';
+import { PaginatedResult } from '../_models/pagination';
 
 
 @Injectable()
@@ -18,9 +19,36 @@ export class UserService {
     private alert: AlertifyService
   ) {}
 
-  getUsers() {
-    return this._httpClient.get<Array<User>>(this.baseURL + 'UserData/users' + '/?pageNumber=1&pageSize=5');
+
+  getUsers(page?, itemsPerPage?, userParams?: any) {
+
+   const paginatedResult: PaginatedResult<User[]> = new PaginatedResult<User[]>();
+   let params = new HttpParams();
+
+   if (page != null && itemsPerPage != null) {
+     params = params.append('pageNumber', page);
+     params = params.append('pageSize', itemsPerPage);
+   }
+
+   if (userParams !=null) {
+     params = params.append('minAge', userParams.minAge);
+     params = params.append('maxAge', userParams.maxAge);
+     params = params.append('gender', userParams.gender);
+   }
+
+      return this._httpClient.get<User[]>( this.baseURL + 'UserData/users', { observe: 'response', params })
+      .map( response => {
+           paginatedResult.result = response.body;
+           paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+            console.log('UserService');
+            console.log(paginatedResult.pagination);
+           return paginatedResult;
+
+      });
+
   }
+
+
 
   getUser(id: string) {
     return this._httpClient.get<User>(this.baseURL + 'UserData/' + id);

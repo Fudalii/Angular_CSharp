@@ -2,11 +2,13 @@ using System;
 using System.Linq;
 using AutoMapper;
 using DatingApp.API.DTO;
+using DatingApp.API.Helpers;
 using DatingApp.API.Models;
+
 
 namespace DatingApp.API.Mapper
 {
-    public class AutoMapperProfile : Profile  
+    public class AutoMapperProfile : Profile
     {
         public AutoMapperProfile()
         {
@@ -14,7 +16,7 @@ namespace DatingApp.API.Mapper
                 .ForMember(dest => dest.PhotoUrl, opt => {
                     opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.IsMain).Url);
                 })
-                .ForMember(dest => dest.Age, opt => opt.ResolveUsing(d => CalculateAge(d.DateOfBirth))  
+                .ForMember(dest => dest.Age, opt => opt.ResolveUsing(d => d.DateOfBirth.CalculateAge())  
                 )
                .ForMember(dest => dest.PasswordHash, opt => opt.Ignore())
                .ForMember(dest => dest.PasswordSalt, opt => opt.Ignore());
@@ -25,7 +27,7 @@ namespace DatingApp.API.Mapper
                 .ForMember(dest => dest.PhotoUrl, opt => {
                     opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.IsMain).Url);
                 })
-                .ForMember(dest => dest.Age, opt => opt.ResolveUsing(d => CalculateAge(d.DateOfBirth))  
+                .ForMember(dest => dest.Age, opt => opt.ResolveUsing(d => d.DateOfBirth.CalculateAge())  
                 )
                 .ForMember(dest => dest.PasswordHash, opt => opt.Ignore())
                 .ForMember(dest => dest.PasswordSalt, opt => opt.Ignore());
@@ -39,11 +41,11 @@ namespace DatingApp.API.Mapper
         }
 
 
-        public static int CalculateAge(DateTime theDateTime)
-            {
-                var age = DateTime.Today.Year - theDateTime.Year;
-                return age;
-            }
+        // public static int CalculateAge(DateTime theDateTime)
+        //     {
+        //         var age = DateTime.Today.Year - theDateTime.Year;
+        //         return age;
+        //     }
         
     }
 }

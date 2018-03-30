@@ -12,7 +12,7 @@ namespace DatingApp.API.Helpers
             CurentPage = curentPage;
             ItemsPerPage = itemsPerPage;
             TotalItems = totalItems;
-            TotalPages = totalPages;
+            TotalPages = totalPages; 
 
         }
 

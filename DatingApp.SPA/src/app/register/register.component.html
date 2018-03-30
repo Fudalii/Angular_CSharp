@@ -64,17 +64,15 @@
         <div class="form-label-group">
           <label for="inputPassword">Password</label>
           <input type="password" id="inputPassword" class="form-control" placeholder="Password"  formControlName="password">
-          <span class="help-block" *ngIf=" registerForm.get('password').errors && registerForm.get('password').touched">Minimum 3 znaki</span>
-          <span class="help-block" *ngIf=" registerForm.get('password').errors && registerForm.get('password').touched">Maximum 8 znaków</span>
+          <span class="help-block" *ngIf=" registerForm.get('password').errors && registerForm.get('password').touched">min 3 characters</span>
+          <span class="help-block" *ngIf=" registerForm.get('password').errors && registerForm.get('password').touched">max 8 characters</span>
         </div>
 
         <div class="form-label-group">
           <label for="inputPassword">Password</label>
-          <input type="password" id="confirmPassword" class="form-control" placeholder="Password" formControlName="confirmpassword">
-          <span class="help-block"
-          *ngIf="registerForm.get('confirmpassword').touched
-          && registerForm.hasError('passwordCheck')">
-          Hasła nie są identyczne</span>
+          <input type="password" id="confirmPassword" class="form-control" placeholder="Password" formControlName="confirmpassword"
+          [ngClass]="{'myError': registerForm.get('confirmpassword').touched && registerForm.hasError('passwordCheck')}">
+          <span class="help-block"*ngIf="registerForm.get('confirmpassword').touched && registerForm.hasError('passwordCheck')" > password is not identical</span>
 
         </div>
 
