@@ -9,9 +9,9 @@ import { Observable } from 'rxjs/Observable';
 import { NgForm } from '@angular/forms';
 
 @Component({
-  selector: 'app-member-list',
-  templateUrl: './member-list.component.html',
-  styleUrls: ['./member-list.component.less']
+  selector: "app-member-list",
+  templateUrl: "./member-list.component.html",
+  styleUrls: ["./member-list.component.less"]
 })
 export class MemberListComponent implements OnInit {
   constructor(
@@ -20,6 +20,7 @@ export class MemberListComponent implements OnInit {
     private _route: ActivatedRoute,
     private _authService: AuthService
   ) {}
+  checkModel: any = { left: false, middle: true, right: false };
 
   users: User[];
   pagination: Pagination;
@@ -28,24 +29,25 @@ export class MemberListComponent implements OnInit {
 
   // filtrowanie
   filterForm: NgForm;
-  user: User = JSON.parse(localStorage.getItem('userToRetturn'));
+  user: User = JSON.parse(localStorage.getItem("userToRetturn"));
   genderList = [
-    { value: 'male', display: 'Males' },
-    { value: 'female', display: 'Females' }
+    { value: "male", display: "Males" },
+    { value: "female", display: "Females" }
   ];
 
   userParama: any = {}; // uzupełniane w ngOnInit
-
 
   ngOnInit() {
     this._route.data.subscribe((data: PaginatedResult<User[]>) => {
       this.users = data['users'].result;
       this.pagination = data['users'].pagination;
+      console.log(this.users);
     });
 
     this.totalItems = this.pagination.TotalItems;
     this.curentPage = this.pagination.CurentPage;
 
+    this.userParama.orderby = '';
     this.userParama.gender = this.user.gender === 'female' ? 'male' : 'female';
     this.userParama.minAge = 18;
     this.userParama.maxAge = 99;
@@ -53,7 +55,11 @@ export class MemberListComponent implements OnInit {
 
   loadUsers() {
     this._userService
-      .getUsers(this.pagination.CurentPage, this.pagination.ItemsPerPage, this.userParama)
+      .getUsers(
+        this.pagination.CurentPage,
+        this.pagination.ItemsPerPage,
+        this.userParama
+      )
       .subscribe(res => {
         this.users = res.result;
         this.curentPage = res.pagination.CurentPage;
@@ -67,15 +73,18 @@ export class MemberListComponent implements OnInit {
   }
 
   filterList() {
-     this.loadUsers();
+    this.loadUsers();
   }
 
   resetFilder(filterForm) {
+    this.userParama.gender = this.user.gender === 'female' ? 'male' : 'female';
+    this.userParama.minAge = 18;
+    this.userParama.maxAge = 99;
+    this.loadUsers();
+  }
 
-       this.userParama.gender = this.user.gender === 'female' ? 'male' : 'female';
-       this.userParama.minAge = 18;
-       this.userParama.maxAge = 99;
-       this.loadUsers();
-
+  sortBy(sort){
+     this.userParama.orderby = sort;
+     this.loadUsers();
   }
 }

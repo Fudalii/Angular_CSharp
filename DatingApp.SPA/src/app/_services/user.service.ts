@@ -30,10 +30,11 @@ export class UserService {
      params = params.append('pageSize', itemsPerPage);
    }
 
-   if (userParams !=null) {
+   if (userParams != null) {
      params = params.append('minAge', userParams.minAge);
      params = params.append('maxAge', userParams.maxAge);
      params = params.append('gender', userParams.gender);
+     params = params.append('orderby', userParams.orderby);
    }
 
       return this._httpClient.get<User[]>( this.baseURL + 'UserData/users', { observe: 'response', params })

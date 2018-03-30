@@ -19,6 +19,6 @@ export class MemberListResolver implements Resolve<PaginatedResult<User[]>> {
 
 
   resolve(route: ActivatedRouteSnapshot): Observable<PaginatedResult<User[]>> {
-    return this._userService.getUsers(1, 4);
+    return this._userService.getUsers();
   }
 }

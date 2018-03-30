@@ -19,7 +19,7 @@
 
       <div class="form-group myMarginIntut">
         <label for="">Gender:  </label>
-        <select class="form-control" name="gender" id="gender" [(ngModel)]="userParama.gender">
+        <select class="form-control" name="gender" [(ngModel)]="userParama.gender">
           <option *ngFor="let gender of genderList" [value]="gender.value" >
             {{gender.display}}
           </option>
@@ -28,11 +28,21 @@
       </div>
 
 
-      <button type="submit" name="" id="" class="btn btn-primary myMarginIntut"> Filter </button>
-      <button type="button" name="" id="" class="btn btn-default myMarginIntut" (click)="resetFilder(filterForm)"> Reset </button>
+      <button type="submit" name="" id=""  class="btn btn-primary myMarginIntut"> Filter </button>
+      <button type="button" name="" id=""  class="btn btn-default myMarginIntut" (click)="resetFilder(filterForm)"> Reset </button>
 
+      <div class="form-group myMarginIntut">
+          <label for="">Sort by: </label>
+          <label class="btn btn-primary myMarginIntut"  btnCheckbox (click)="sortBy('last')">Last Active</label>
+          <label class="btn btn-primary myMarginIntut"  btnCheckbox (click)="sortBy('created')">Newest</label>
+      </div>
 
     </form>
+
+  <!-- <div class="btn-group">
+    <label class="btn btn-primary" [(ngModel)]="checkModel.left" btnCheckbox>Left</label>
+    <label class="btn btn-primary" [(ngModel)]="checkModel.right" btnCheckbox>Right</label>
+  </div> -->
 
   </div>
 
