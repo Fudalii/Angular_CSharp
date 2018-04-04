@@ -24,6 +24,10 @@ namespace DatingApp.API.Models
         // One tu many Left
         public IList<Photos> Photos { get; set; }
 
+        public IList<Like> Liker {get; set;}  // many to many
+        public IList<Like> Likee {get; set;}  // many to many
+
+
      
     }
 }

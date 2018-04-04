@@ -13,6 +13,7 @@ namespace DatingApp.API.Data
         public DbSet<Value> Value { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Photos> Photos { get; set; }  
+        public DbSet<Like> Like { get; set; }  
 
 
          protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -22,6 +23,23 @@ namespace DatingApp.API.Data
                         .HasOne(p => p.User)
                         .WithMany(u => u.Photos)
                         .IsRequired();
+
+                    modelBuilder.Entity<Like>()
+                        .HasKey( k => new {k.LikeeId, k.LikerId});
+
+                    modelBuilder.Entity<Like>()
+                        .HasOne(u => u.Likee)
+                        .WithMany(u => u.Liker)
+                        .HasForeignKey(u => u.LikerId)
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    modelBuilder.Entity<Like>()
+                        .HasOne(u => u.Liker)
+                        .WithMany(u => u.Likee)
+                        .HasForeignKey(u => u.LikeeId)
+                        .OnDelete(DeleteBehavior.Restrict);    
+                        
+
 
                     base.OnModelCreating(modelBuilder);
 
