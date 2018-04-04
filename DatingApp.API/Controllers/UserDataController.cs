@@ -57,10 +57,6 @@ namespace DatingApp.API.Controllers
 
 
 
-
-
-
-
         [HttpGet("{id}", Name="GetUser")]
         public async Task<IActionResult> GetUser(int id){
 
@@ -102,9 +98,45 @@ namespace DatingApp.API.Controllers
 
             throw new Exception("Update Failed");
 
-            }
+         }
 
-        }
+
+         [HttpPost("{id}/like/{recipientId}")]
+         public async Task<IActionResult> LikeUser(int id, int recipientId)
+         {
+
+            // sprawdzanie tokenu
+             if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                    return Unauthorized();
+
+            // sprawdzanie czy już istnieje taka relacja
+            var like = await _repo.GetLike(id, recipientId);
+
+            if (like != null)
+                return BadRequest("You Alredy Like This User");
+            
+            // Sprawdzenie czy user jakiego chcemy polubić istnieje
+            if (await _repo.GetUser(recipientId) == null)
+                return NotFound();
+
+            // jesli nie ma relacji i user o podanym id istnieje - towrzę instancję
+            like = new Like 
+                {
+                    LikerId = id,
+                    LikeeId = recipientId
+                };
+
+            // dodaję rekord do bazy 
+            _repo.Add<Like>(like);
+
+            if (await  _repo.SaveAll())
+                return Ok();
+
+            return BadRequest("Bład dodania usera do bazy");
+
+         }
+
+    }
         
     
 }

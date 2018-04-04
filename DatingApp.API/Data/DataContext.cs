@@ -39,8 +39,6 @@ namespace DatingApp.API.Data
                         .HasForeignKey(u => u.LikeeId)
                         .OnDelete(DeleteBehavior.Restrict);    
                         
-
-
                     base.OnModelCreating(modelBuilder);
 
         }
