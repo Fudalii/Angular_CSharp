@@ -25,7 +25,6 @@ import { MemberCardComponent } from './members/member-card/member-card.component
 import { AuthModule } from './_services/auth/auth.module';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 import { MemberDetailResolver } from './_resolve/member-detail.resolver';
-import { MemberListResolver } from './_resolve/member-list.resolver';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { MemberEditResolver } from './_resolve/member-edit.resolver';
 import { PreventUnSaveGuard } from './_guards/preventUnSave.guard';
@@ -33,6 +32,8 @@ import { GuardLoginService } from './_guards/guardLogin.guard';
 import { MemberPhotoEditComponent } from './members/member-edit/member-photo-edit/member-photo-edit.component';
 import { FileUploadModule } from 'ng2-file-upload';
 import { TimeAgoPipe } from 'time-ago-pipe';
+import { MemberListResolver } from './_resolve/member-list.resolver';
+import { LikeListResolver } from './_resolve/like-list.resolver';
 
 
 
@@ -77,7 +78,8 @@ import { TimeAgoPipe } from 'time-ago-pipe';
     UserService,
     MemberDetailResolver,
     MemberListResolver,
-    MemberEditResolver
+    MemberEditResolver,
+    LikeListResolver
   ],
   bootstrap: [AppComponent]
 })

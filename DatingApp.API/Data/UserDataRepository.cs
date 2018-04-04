@@ -26,15 +26,13 @@ namespace DatingApp.API.Data
 
             if (userParams.Likees)
             {
-                var userLikers = await GetUserLikes(userParams.UserId, userParams.Likers);
-                users = users.Where(u => userLikers.Any(liker => liker.LikerId == u.Id));
+                users = users.Where(u => u.Liker.Any(liker => liker.LikerId == u.Id ));
             }
 
 
             if (userParams.Likers)
             {
-                var userLikees = await GetUserLikes(userParams.UserId, userParams.Likers);
-                users = users.Where(u => userLikees.Any(likee => likee.LikeeId == u.Id));
+                users = users.Where(u => u.Likee.Any(liker => liker.LikeeId == u.Id ));
             }
 
 

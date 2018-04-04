@@ -20,10 +20,20 @@ export class UserService {
   ) {}
 
 
-  getUsers(page?, itemsPerPage?, userParams?: any) {
+  getUsers(page?, itemsPerPage?, userParams?: any, likeParams?: any) {
 
    const paginatedResult: PaginatedResult<User[]> = new PaginatedResult<User[]>();
    let params = new HttpParams();
+    console.log('service');
+      console.log(likeParams);
+
+   if (likeParams === 'Likers') {
+     params = params.append('Likers', 'true');
+   }
+
+   if (likeParams === 'Likees') {
+      params = params.append('Likees', 'true');
+    }
 
    if (page != null && itemsPerPage != null) {
      params = params.append('pageNumber', page);

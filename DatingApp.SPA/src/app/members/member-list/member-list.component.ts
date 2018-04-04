@@ -9,9 +9,9 @@ import { Observable } from 'rxjs/Observable';
 import { NgForm } from '@angular/forms';
 
 @Component({
-  selector: "app-member-list",
-  templateUrl: "./member-list.component.html",
-  styleUrls: ["./member-list.component.less"]
+  selector: 'app-member-list',
+  templateUrl: './member-list.component.html',
+  styleUrls: ['./member-list.component.less']
 })
 export class MemberListComponent implements OnInit {
   constructor(
@@ -29,10 +29,10 @@ export class MemberListComponent implements OnInit {
 
   // filtrowanie
   filterForm: NgForm;
-  user: User = JSON.parse(localStorage.getItem("userToRetturn"));
+  user: User = JSON.parse(localStorage.getItem('userToRetturn'));
   genderList = [
-    { value: "male", display: "Males" },
-    { value: "female", display: "Females" }
+    { value: 'male', display: 'Males' },
+    { value: 'female', display: 'Females' }
   ];
 
   userParama: any = {}; // uzupełniane w ngOnInit
@@ -83,7 +83,7 @@ export class MemberListComponent implements OnInit {
     this.loadUsers();
   }
 
-  sortBy(sort){
+  sortBy(sort) {
      this.userParama.orderby = sort;
      this.loadUsers();
   }

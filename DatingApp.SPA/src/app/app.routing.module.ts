@@ -8,10 +8,11 @@ import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 import { MemberDetailResolver } from './_resolve/member-detail.resolver';
-import { MemberListResolver } from './_resolve/member-list.resolver';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { MemberEditResolver } from './_resolve/member-edit.resolver';
 import { PreventUnSaveGuard } from './_guards/preventUnSave.guard';
+import { MemberListResolver } from './_resolve/member-list.resolver';
+import { LikeListResolver } from './_resolve/like-list.resolver';
 
 
 
@@ -42,7 +43,8 @@ const appRoutes: Routes = [
   {
     path: 'list',
     component: ListsComponent,
-    canActivate: [GuardLoginService]
+    canActivate: [GuardLoginService],
+    resolve: { users: LikeListResolver }
   },
   {
     path: 'messages',

@@ -28,7 +28,7 @@ namespace DatingApp.API.Controllers
         }
 
 
-        [HttpGet ("users")]
+        [HttpGet ("users")] 
         public async Task<IActionResult> GetUsers(UserParams userParams){
 
             // Wykluczenie z listy włąsnego profilu
@@ -37,7 +37,7 @@ namespace DatingApp.API.Controllers
             var userFromRepo = await _repo.GetUser(curentUserId);
 
             userParams.UserId = userFromRepo.Id; 
-            
+             
 
             if (string.IsNullOrEmpty(userParams.Gender))
             {
